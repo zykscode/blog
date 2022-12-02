@@ -16,19 +16,7 @@ function Container(props: { [x: string]: any; children: any }) {
           <main className="page page-has-cover page-has-icon page-has-image-icon full-page index-page">
             <IconHero />
             <h1 className="title">Zykson.com</h1>
-            <article className="page-content-inner">
-              <div className="collection block">
-                <div className="collection-header">
-                  <div className="collection-header-title">Blog Posts</div>
-                </div>
-                <div className="gallery">
-                                <div className="gallery-view">
-                                    <div className="gallery-grid gallery-grid-size-medium">
-                              
-                {children}
-                </div></div></div>
-              </div>
-            </article>
+           {children}
           </main>
         </div>
       </div>
