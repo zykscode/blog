@@ -1,14 +1,16 @@
 import HeadMeta from "#/components/HeadMeta";
 
 type Props = {
-  title:string
-  description:string
-  content?:string
-  date:string
-  image:string
-}
+    title:string
+    description:string
+    content?:string
+    date:string
+    image:string
+  }
+  
 
 export default function Head({title,description,content,date,image}:Props) {
+ 
   return (
     <>
       <title>{title}</title>

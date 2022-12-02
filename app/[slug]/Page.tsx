@@ -2,7 +2,7 @@ import PostCard from '#/components/PostCard';
 import { Post } from '#/lib/types';
 import { getPosts, getPostsPhotos } from '#/services/Index';
 import { getPlaiceholder } from 'plaiceholder';
-import { Key } from 'react';
+
 
 const blurImages = async (photos: any[]) => {
   const images = await Promise.all(

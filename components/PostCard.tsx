@@ -2,13 +2,19 @@ import Link from 'next/link';
 import React from 'react';
 import moment from 'moment';
 import BlogImage from './BlogImage';
-type Props = {};
-
-const passingImages = (coverImage: any[], post: { id: any }) => {
-  return coverImage.find((img: { postId: any }) => img.postId === post.id);
+import { BlurredImages, Post } from '#/lib/types';
+type Props = {
+  post:Post
+  coverImages:BlurredImages[]
 };
-const PostCard = ({ post, coverImage }) => {
-  const blurImg = passingImages(coverImage, post);
+
+const passingImages = (coverImages:BlurredImages[], post:Post) => {
+  
+  return coverImages.find((img) => img.postId === post.id);
+};
+const PostCard = ({ post, coverImages }:Props) => {
+  const blurImg = passingImages(coverImages, post);
+  console.log(blurImg)
   return (
     <Link
       className="collection-card collection-card-size-medium"
@@ -25,7 +31,6 @@ const PostCard = ({ post, coverImage }) => {
                 <div className="page-icon-inline page-icon-image">
                   <svg
                     className="page-title-icon page-icon"
-                    alt={post.title}
                     viewBox="0 0 30 30"
                     width="16"
                   >
@@ -50,27 +55,12 @@ const PostCard = ({ post, coverImage }) => {
         <div className="collection-card-property">
           <span className="property property-multi_select">
             {post.tags.map(
-              (tag: {
-                name:
-                  | boolean
-                  | React.ReactElement<
-                      any,
-                      string | React.JSXElementConstructor<any>
-                    >
-                  | React.ReactFragment
-                  | React.Key
-                  | null
-                  | undefined;
-                colors: any;
-              }) => {
-                return (
-                  <div
-                    key={tag.name}
-                    className={`property-multi_select-item item-${tag.colors}`}
-                  >
-                    {tag.name}
-                  </div>
-                );
+              (tag) => {
+                return(<div key={tag.name}
+                  className={`property-multi_select-item item-${tag.colors}`}
+                >
+                  {tag.name}
+                </div>);
               },
             )}
           </span>
