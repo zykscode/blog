@@ -1,6 +1,5 @@
-import Container from '#/components/Container';
+import Header from '#/components/Header';
 import '../styles/globals.scss';
-import Me from '#/public/static/images/me.jpg';
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +13,13 @@ export default function RootLayout({
       */}
       <head />
       <body className="">
-        <Container coverWrapper={Me}>{children}</Container>
+        <div className="notion app">
+          <div className="viewport"></div>
+          <div className="frame">
+            <Header />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

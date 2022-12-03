@@ -14,11 +14,10 @@ const passingImages = (coverImages:BlurredImages[], post:Post) => {
 };
 const PostCard = ({ post, coverImages }:Props) => {
   const blurImg = passingImages(coverImages, post);
-  console.log(blurImg)
   return (
     <Link
       className="collection-card collection-card-size-medium"
-      href={`/blog/${post.slug}`}
+      href={`/${post.slug}`}
     >
       <div className="collection-card-cover">
         <BlogImage src={blurImg} alt={post.title} />

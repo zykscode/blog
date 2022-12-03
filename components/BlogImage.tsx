@@ -1,15 +1,21 @@
 import React from 'react'
 import Image from 'next/image'
+import { BlurredImages } from '#/lib/types';
 
-function BlogImage({ src, alt }) {
+type BlogImageProps = {
+    src:BlurredImages|undefined;
+    alt:string
+}
+
+function BlogImage({ src, alt}:BlogImageProps) {
     return (
         <Image
             alt={alt}
-            width={src.width}
-            height={src.height}
-            src={src.src}
+            width={src!.width}
+            height={src!.height}
+            src={src!.src}
             placeholder="blur"
-            blurDataURL={src.base64}
+            blurDataURL={src!.base64}
         />
     )
 }
