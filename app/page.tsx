@@ -32,28 +32,31 @@ const fetchData = async () => {
 
 export default async function Home() {
   const { blurredPhotos, posts } = await fetchData();
-  return (<Container coverWrapper={Me}>
-
- 
-    <div className="page-content page-content-has-aside">
-    <article className="page-content-inner">
-      <div className="collection block">
-        <div className="collection-header">
-          <div className="collection-header-title">Blog Posts</div>
-        </div>
-        <div className="gallery">
-      <div className="gallery-view">
-        <div className="gallery-grid gallery-grid-size-medium">
-          {posts.map((post: Post) => (
-            <PostCard key={post.slug} post={post} coverImages={blurredPhotos} />
-          ))}
-        </div>
+  return (
+    <Container coverWrapper={Me}>
+      <div className="page-content page-content-has-aside">
+        <article className="page-content-inner">
+          <div className="collection block">
+            <div className="collection-header">
+              <div className="collection-header-title">Blog Posts</div>
+            </div>
+            <div className="gallery">
+              <div className="gallery-view">
+                <div className="gallery-grid gallery-grid-size-medium">
+                  {posts.map((post: Post) => (
+                    <PostCard
+                      key={post.slug}
+                      post={post}
+                      coverImages={blurredPhotos}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <Aside />
       </div>
-    </div>
-      </div>
-    </article>
-    <Aside />
-  </div>
-  </Container>
+    </Container>
   );
 }

@@ -1,3 +1,4 @@
+import Container from '#/components/Container';
 import IconHero from '#/components/IconHero';
 import PostCard from '#/components/PostCard';
 import { Post, Slug, Tag } from '#/lib/types';
@@ -28,7 +29,7 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
-const fetchData = async ({ slug }) => {
+const fetchData = async ({ slug }:{slug:string}) => {
   console.log(slug,'here')
   const { post } = await getPost(slug)  
   const { coverPhoto } = post;
@@ -36,12 +37,12 @@ const fetchData = async ({ slug }) => {
   return { blurredPhoto, post };
 };
 
-export default async function Home({ params }) {
+export default async function Home({ params }:{params:{slug:string}}) {
  
  const {post,blurredPhoto} = await fetchData(params);
- console.log(post)
-  return (
-    <h1>hello page</h1>
+ console.log(blurredPhoto)
+ return (
+    <h1>Still under development</h1>
     // <>
     //   {/* <PageSEO title={post.title} description={post.summary} /> */}
     //   <div className="page-cover-wrapper">
