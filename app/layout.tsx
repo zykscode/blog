@@ -1,6 +1,6 @@
-import { Footer } from '#/components/Footer';
 import Header from '#/components/Header';
-import '../styles/globals.scss';
+import '#/styles/globals.css';
+import '#/styles/style.scss';
 export default function RootLayout({
   children,
 }: {
@@ -18,10 +18,7 @@ export default function RootLayout({
           <div className="viewport"></div>
           <div className="frame">
             <Header />
-            <div className="page-scroller ">  
             {children}
-            <Footer/>
-            </div>
           </div>
         </div>
       </body>

@@ -21,11 +21,11 @@ export const getProjects = async () => {
     ))
 }
 
-export const getProject = async (slug:string) => {
+export const getProject = async (params:{slug:string}) => {
     const graphcms = new GraphQLClient('https://api-eu-central-1.hygraph.com/v2/cl6zaoh5c087901uhd1zdga18/master')
     return (await graphcms.request(`
     
-        query ProjectPageQuery($slug:string){
+        query ProjectPageQuery($params){
         project(where: { slug: $slug }) {
           name
           tags
@@ -40,7 +40,7 @@ export const getProject = async (slug:string) => {
         }
       }`,
       {
-        slug:slug
+        slug:params.slug
       }
     ))
 }
@@ -102,7 +102,7 @@ export const getPostsPhotos = async () => {
      ))
 }
 
-export const getPost = async (slug:string) => {
+export const getPost = async (params:{slug:string}) => {
     const graphcms = new GraphQLClient('https://api-eu-central-1.hygraph.com/v2/cl6zaoh5c087901uhd1zdga18/master')
     return (await graphcms.request(`
     
@@ -127,6 +127,7 @@ export const getPost = async (slug:string) => {
             createdAt
             content{
               markdown
+              html
             }
             coverPhoto{
               url
@@ -134,7 +135,7 @@ export const getPost = async (slug:string) => {
           }
           }`,
       {
-        slug:slug
+        slug:params.slug
       }
     ))
 }

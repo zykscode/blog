@@ -13,7 +13,7 @@ export default function Error({ error, reset }: any) {
     <Boundary labels={['Home page Error UI']} color="pink">
       <div className="space-y-4">
         <div className="text-sm text-vercel-pink">
-          <strong className="font-bold">Error:</strong> {error?.message}
+          <h1>Under construction </h1>
         </div>
         <div>
           <Button onClick={() => reset()}>Try Again</Button>
