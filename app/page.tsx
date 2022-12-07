@@ -43,7 +43,7 @@ export default async function Home() {
             <div className="gallery">
               <div className="gallery-view">
                 <div className="gallery-grid gallery-grid-size-medium">
-                  {posts.map((post: Post) => (
+                  {posts.map((post) => (
                     <PostCard
                       key={post.slug}
                       post={post}

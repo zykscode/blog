@@ -27,7 +27,7 @@ export async function generateStaticParams() {
   const slugRes = await getPostPaths();
   const posts = slugRes.posts;
 
-  return posts.map((post: Post) => ({
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -122,7 +122,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-        <div className="bg-pink-500 page-content page-content-has-aside page-content-has-toc">
+        <div className="page-content page-content-has-aside page-content-has-toc">
            {/* <MDXRender post={content}/>  */}
            <h1> Under construction</h1>
         </div>
