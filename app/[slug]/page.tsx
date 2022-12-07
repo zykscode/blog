@@ -63,7 +63,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   <span className="property property-multi_select">
                     {post.tags.map((tag: Tag) => {
                       return (
-                        <Link href={`/tags/${tag.slug}`} key={tag.name}>
+                        <Link href={`/tag/${tag.slug}`} key={tag.name}>
                           {' '}
                           <div
                             className={`property-multi_select-item item-${tag.colors} button`}
@@ -77,7 +77,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                 </div>
               </div>
               <div className="collection-row-property">
-                <div className="collection-column-title">
+                <div className="collection-column-title sm:hidden">
                   <svg
                     viewBox="0 0 14 14"
                     className="collection-column-title-icon"
@@ -95,7 +95,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                 </div>
               </div>
               <div className="collection-row-property">
-                <div className="collection-column-title">
+                <div className="collection-column-title hidden bg-purple-300">
                   <svg
                     viewBox="0 0 14 14"
                     className="collection-column-title-icon"
