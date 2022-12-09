@@ -11,9 +11,9 @@ import {
   getPostsPhotos,
 } from '#/services/Index';
 import moment from 'moment';
-import Image from 'next/image';
 import Link from 'next/link';
 import { getPlaiceholder } from 'plaiceholder';
+import { mdxToHtml } from '#/lib/mdx';
 
 const blurImages = async (photo: any) => {
   const { base64, img } = await getPlaiceholder(photo);
@@ -36,12 +36,14 @@ const fetchData = async (param:{slug:string}) => {
   const { coverPhoto} = post;
   const content = await serialize(post.content.markdown)
   const blurredPhoto = await blurImages(coverPhoto.url);
-  return { blurredPhoto, post, content };
+   const {html, readingTime} = await mdxToHtml(post.content.markdown)
+return { blurredPhoto, html, readingTime, post, content };
 };
 
 export default async function Home({ params }: { params: { slug: string } }) {
   const { slug } = params
-  const { post, blurredPhoto, content } = await fetchData(params);
+  const { post, blurredPhoto, html, readingTime, content } = await fetchData(params);
+   console.log(readingTime, html)
   return (
     <Container coverWrapper={blurredPhoto}>
       <main className="page page-has-cover page-has-icon page-has-image-icon full-page">
@@ -59,6 +61,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
                   </svg>
                   <div className="collection-column-title-body">Tags</div>
                 </div>
+
                 <div className="collection-row-value">
                   <span className="property property-multi_select">
                     {post.tags.map((tag: Tag) => {
@@ -122,9 +125,10 @@ export default async function Home({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-        <div className="page-content page-content-has-aside page-content-has-toc">
-           {/* <MDXRender post={content}/>  */}
-           <h1> Under construction</h1>
+        <div className="page-content page-content-has-aside page-content-has-toc prose">
+            <article className='page-content-inner'>
+              <MDXRender post={html}/>
+              </article> 
         </div>
       </main>
     </Container>

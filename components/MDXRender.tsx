@@ -32,10 +32,15 @@ function RoundedImage(props:any) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
+function headingElements(props:any){
+  return <span className='bg-pink'>{props}</span>
+}
+
 
 export const MDXComponents = {
     BlogImage,
     a: CustomLink,
+    h2:headingElements,
     img:RoundedImage,
     pre: Pre,
     BlogNewsletterForm: BlogNewsletterForm,
