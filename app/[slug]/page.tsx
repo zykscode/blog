@@ -14,6 +14,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import { getPlaiceholder } from 'plaiceholder';
 import { mdxToHtml } from '#/lib/mdx';
+import TOCInline from '#/components/TOCInline';
 
 const blurImages = async (photo: any) => {
   const { base64, img } = await getPlaiceholder(photo);
@@ -36,14 +37,13 @@ const fetchData = async (param:{slug:string}) => {
   const { coverPhoto} = post;
   const content = await serialize(post.content.markdown)
   const blurredPhoto = await blurImages(coverPhoto.url);
-   const {html, readingTime} = await mdxToHtml(post.content.markdown)
-return { blurredPhoto, html, readingTime, post, content };
+   const {html, toc, readingTime} = await mdxToHtml(post.content.markdown)
+return { blurredPhoto, html,toc, readingTime, post, content };
 };
 
 export default async function Home({ params }: { params: { slug: string } }) {
-  const { slug } = params
-  const { post, blurredPhoto, html, readingTime, content } = await fetchData(params);
-   console.log(readingTime, html)
+  const { post, toc, blurredPhoto, html, readingTime, content } = await fetchData(params);
+  console.log(toc)
   return (
     <Container coverWrapper={blurredPhoto}>
       <main className="page page-has-cover page-has-icon page-has-image-icon full-page">
@@ -125,10 +125,18 @@ export default async function Home({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-        <div className="page-content page-content-has-aside page-content-has-toc prose">
-            <article className='page-content-inner'>
+        <div className="page-content page-content-has-aside page-content-has-toc">
+            <article className='page-content-inner prose prose-dark'>
               <MDXRender post={html}/>
               </article> 
+              <aside className="aside">
+                <div className="aside-table-of-contents">
+                    <div className="aside-table-of-contents-header">Table of Contents</div>
+                    <nav className="notions-table-of-contents">
+                        <TOCInline toc={toc} />
+                    </nav>
+                </div>
+            </aside>
         </div>
       </main>
     </Container>

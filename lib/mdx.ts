@@ -2,19 +2,16 @@ import { serialize } from 'next-mdx-remote/serialize';
 import readingTime from 'reading-time';
 import remarkGfm from 'remark-gfm';
 import remarkFootnotes from 'remark-footnotes'
-import remarkMath from 'remark-math'
 import rehypeSlug from 'rehype-slug';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeKatex from 'rehype-katex'
-import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
-import rehypePresetMinify from 'rehype-preset-minify'
 
 
-
-export async function mdxToHtml(source) {
+export async function mdxToHtml(source:any) {
+  let toc:any[] = []
   const mdxSource = await serialize(source, {
     mdxOptions: {
       remarkPlugins: [remarkGfm,
@@ -24,7 +21,7 @@ export async function mdxToHtml(source) {
         rehypeSlug,
         rehypeCodeTitles,
         rehypePrism,
-        [
+          [
           rehypeAutolinkHeadings,
           {
             properties: {
@@ -43,6 +40,7 @@ export async function mdxToHtml(source) {
   return {
     html: mdxSource,
     wordCount: source.split(/\s+/gu).length,
-    readingTime: readingTime(source).text
+    readingTime: readingTime(source).text,
+    toc
   };
 }

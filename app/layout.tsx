@@ -1,6 +1,9 @@
 import Header from '#/components/Header';
+// import '#/styles/prism.css';
 import '#/styles/globals.css';
 import '#/styles/style.scss';
+import '#/styles/new.css';
+
 export default function RootLayout({
   children,
 }: {
