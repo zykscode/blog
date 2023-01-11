@@ -32,6 +32,7 @@ const fetchData = async () => {
 
 export default async function Home() {
   const { blurredPhotos, posts } = await fetchData();
+  console.log(posts)
   return (
     <Container coverWrapper={Me}>
       <div className="page-content page-content-has-aside">

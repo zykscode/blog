@@ -1,3 +1,5 @@
+
+import path from 'path'
 import { serialize } from 'next-mdx-remote/serialize';
 import readingTime from 'reading-time';
 import remarkGfm from 'remark-gfm';
@@ -8,6 +10,105 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeKatex from 'rehype-katex'
 import rehypePrismPlus from 'rehype-prism-plus'
+import getAllFilesRecursively from './utils/files';
+import { existsSync, readFileSync } from 'fs';
+
+
+
+interface FileData {
+    mdxSource: string;
+    toc: any;
+    frontMatter: {
+        readingTime: number;
+        slug: string;
+        fileName: string;
+        date: string | null;
+        [key: string]: any;
+    };
+}
+
+export async function getFileBySlug(type: string, slug: string): Promise<FileData> {
+  const mdxPath = path.join(root, 'data', type, `${slug}.mdx`);
+  const mdPath = path.join(root, 'data', type, `${slug}.md`);
+  const source = existsSync(mdxPath)
+    ? readFileSync(mdxPath, 'utf8')
+    : readFileSync(mdPath, 'utf8');
+
+  // https://github.com/kentcdodds/mdx-bundler#nextjs-esbuild-enoent
+  if (process.platform === 'win32') {
+    process.env.ESBUILD_BINARY_PATH = path.join(root, 'node_modules', 'esbuild', 'esbuild.exe');
+  } else {
+    process.env.ESBUILD_BINARY_PATH = path.join(root, 'node_modules', 'esbuild', 'bin', 'esbuild');
+  }
+
+  let toc: any[] = [];
+
+  console.log(source);
+  const { code, frontmatter } = await bundleMDX({
+    source,
+    // mdx imports can be automatically source from the components directory
+    cwd: path.join(root, 'components'),
+    xdmOptions(options, frontmatter: any) {
+      // this is the recommended way to add custom remark/rehype plugins:
+      // The syntax might look weird, but it protects you in case we add/remove
+      // plugins in the future.
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        remarkExtractFrontmatter,
+        [remarkTocHeadings, { exportRef: toc }],
+        remarkGfm,
+        remarkCodeTitles,
+        [remarkFootnotes, { inlineNotes: true }],
+        remarkMath,
+        remarkImgToJsx,
+      ];
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeSlug,
+        rehypeAutolinkHeadings,
+        rehypeKatex,
+        [rehypeCitation, { path: path.join(root, 'data') }],
+        [rehypePrismPlus, { ignoreMissing: true }],
+        rehypePresetMinify,
+      ];
+      return options;
+    },
+    esbuildOptions: (options) => {
+      options.loader = {
+        ...options.loader,
+        '.js': 'jsx',
+      };
+      return options;
+    },
+  });
+
+  return {
+    mdxSource: code,
+    toc,
+    frontMatter: {
+      readingTime: readingTime(code),
+      slug: slug || null,
+      fileName: existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
+      ...frontmatter,
+      date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+    },
+  }
+}
+
+
+
+const root = process.cwd()
+
+export function formatSlug(slug: string) {
+  return slug.replace(/\.(mdx|md)/, '');
+}
+
+export function dateSortDesc(a: string | Date, b: string | Date) {
+  if (a > b) return -1;
+  if (a < b) return 1;
+  return 0;
+}
+
 
 
 export async function mdxToHtml(source:any) {
@@ -43,4 +144,34 @@ export async function mdxToHtml(source:any) {
     readingTime: readingTime(source).text,
     toc
   };
+}
+
+
+
+export async function getAllFilesFrontMatter(folder: string) {
+  const prefixPaths = path.join(root, 'data', folder);
+
+  const files = getAllFilesRecursively(prefixPaths);
+
+  const allFrontMatter: any[] = [];
+
+  files.forEach((file: string) => {
+    // Replace is needed to work on Windows
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/');
+    // Remove Unexpected File
+    if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
+      return;
+    }
+    const source = readFileSync(file, 'utf8');
+    const { data: frontmatter } = matter(source);
+    if (frontmatter.draft !== true) {
+      allFrontMatter.push({
+        ...frontmatter,
+        slug: formatSlug(fileName),
+        date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
+      });
+    }
+  });
+
+  return allFrontMatter.sort((a: any, b: any) => dateSortDesc(a.date, b.date));
 }
