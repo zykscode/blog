@@ -3,19 +3,16 @@ import Image from 'next/image'
 import { BlurredImages } from '#/lib/types';
 
 type BlogImageProps = {
-    src:BlurredImages|undefined;
+    src:string;
     alt:string
 }
 
 function BlogImage({ src, alt}:BlogImageProps) {
+    console.log(src)
     return (
         <Image
             alt={alt}
-            width={src!.width}
-            height={src!.height}
-            src={src!.src}
-            placeholder="blur"
-            blurDataURL={src!.base64}
+            src={src[0]}
         />
     )
 }

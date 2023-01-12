@@ -1,16 +1,20 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export type Post = {
-  id: string;
-  slug: string;
-  content?: { markdown: string };
-  title: string;
-  date?: string;
-  summary: string;
-  coverImage?: string;
-  readingTime?: string;
-  createdAt?: string;
-  tags: Tag[];
+  slug: any;
+  images?: any;
+  id?: string | undefined;
+  content?: {
+      markdown: string;
+  } | undefined;
+  title?: string | undefined;
+  date?: string | undefined;
+  summary?: string | undefined;
+  coverImage?: string | undefined;
+  readingTime?: string | undefined;
+  createdAt?: string | undefined;
+  tags?: Tag[] | undefined;
+
 }
 
 export type Slug = string

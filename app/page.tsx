@@ -2,37 +2,24 @@ import Aside from '#/components/Aside';
 import PostCard from '#/components/PostCard';
 import Me from '#/public/static/images/me.jpg';
 import Container from '#/components/Container';
-import { Post } from '#/lib/types';
+import { Post, Tag } from '#/lib/types';
 import { getPosts, getPostsPhotos } from '#/services/Index';
-import { getPlaiceholder } from 'plaiceholder';
+// import { getAllFilesFrontMatter } from '#/lib/mdx';
 
-const blurImages = async (photos: any[]) => {
-  const images = await Promise.all(
-    photos.map(
-      async (image: { coverPhoto: { url: string | Buffer }; id: any }) => {
-        const { base64, img } = await getPlaiceholder(image.coverPhoto.url);
-        return {
-          ...img,
-          base64,
-          postId: image.id,
-        };
-      },
-    ),
-  );
-  return images;
-};
 
 const fetchData = async () => {
-  const { posts } = await getPosts();
-  const responsePhotos = await getPostsPhotos();
-  const photos = responsePhotos.posts;
-  const blurredPhotos = await blurImages(photos);
-  return { blurredPhotos, posts };
+  // const { posts } = await getPosts();
+  // const responsePhotos = await getPostsPhotos();
+  // const photos = responsePhotos.posts;
+  // const blurredPhotos = await blurImages(photos);
+  // return { blurredPhotos, posts };
+ // const posts = await getAllFilesFrontMatter('blog')
+  return{hello:'hey'}
 };
 
 export default async function Home() {
-  const { blurredPhotos, posts } = await fetchData();
-  console.log(posts)
+  //const {posts} = await fetchData()
+  
   return (
     <Container coverWrapper={Me}>
       <div className="page-content page-content-has-aside">
@@ -44,13 +31,13 @@ export default async function Home() {
             <div className="gallery">
               <div className="gallery-view">
                 <div className="gallery-grid gallery-grid-size-medium">
-                  {posts.map((post) => (
+                  {posts.map((post: { slug: any; images?: any; id?: string; content?: { markdown: string; } | undefined; title?: string; date?: string | undefined; summary?: string; coverImage?: string | undefined; readingTime?: string | undefined; createdAt?: string | undefined; tags?: Tag[]; }) => (
                     <PostCard
                       key={post.slug}
                       post={post}
-                      coverImages={blurredPhotos}
+                      coverImages={post.images[0]}
                     />
-                  ))}
+                  ))} 
                 </div>
               </div>
             </div>

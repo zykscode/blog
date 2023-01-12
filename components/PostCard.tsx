@@ -2,25 +2,19 @@ import Link from 'next/link';
 import React from 'react';
 import moment from 'moment';
 import BlogImage from './BlogImage';
-import { BlurredImages, Post } from '#/lib/types';
+import { Post } from '#/lib/types';
 type Props = {
   post:Post
-  coverImages:BlurredImages[]
 };
 
-const passingImages = (coverImages:BlurredImages[], post:Post) => {
-  
-  return coverImages.find((img) => img.postId === post.id);
-};
-const PostCard = ({ post, coverImages }:Props) => {
-  const blurImg = passingImages(coverImages, post);
-  return (
+const PostCard = ({ post }:Props) => {
+   return (
     <Link
       className="collection-card collection-card-size-medium"
       href={`/${post.slug}`}
     >
       <div className="collection-card-cover">
-        <BlogImage src={blurImg} alt={post.title} />
+       {post.images && <BlogImage src={post.images} alt={post.title!} />}
       </div>
       <div className="collection-card-body">
         <div className="collection-card-property">
@@ -53,7 +47,7 @@ const PostCard = ({ post, coverImages }:Props) => {
         </div>
         <div className="collection-card-property">
           <span className="property property-multi_select">
-            {post.tags.map(
+            {post.tags!.map(
               (tag) => {
                 return(<div key={tag.name}
                   className={`property-multi_select-item item-${tag.colors}`}

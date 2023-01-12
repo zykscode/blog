@@ -1,5 +1,6 @@
-
+import { bundleMDX, } from 'mdx-bundler'
 import path from 'path'
+import remarkMath from 'remark-math'
 import { serialize } from 'next-mdx-remote/serialize';
 import readingTime from 'reading-time';
 import remarkGfm from 'remark-gfm';
@@ -12,6 +13,14 @@ import rehypeKatex from 'rehype-katex'
 import rehypePrismPlus from 'rehype-prism-plus'
 import getAllFilesRecursively from './utils/files';
 import { existsSync, readFileSync } from 'fs';
+import matter from 'gray-matter';
+import remarkCodeTitles from './remark-code-title';
+import remarkExtractFrontmatter from './remark-extract-frontmatter';
+import remarkTocHeadings from './remark-toc-headings';
+import { ProcessorOptions } from '@mdx-js/mdx';
+// import rehypeCitation from 'rehype-citation'
+import rehypePresetMinify from 'rehype-preset-minify'
+import remarkImgToJsx from './remark-img-to-jsx';
 
 
 
@@ -48,7 +57,7 @@ export async function getFileBySlug(type: string, slug: string): Promise<FileDat
     source,
     // mdx imports can be automatically source from the components directory
     cwd: path.join(root, 'components'),
-    xdmOptions(options, frontmatter: any) {
+    mdxOptions(options:ProcessorOptions, frontmatter: any) {
       // this is the recommended way to add custom remark/rehype plugins:
       // The syntax might look weird, but it protects you in case we add/remove
       // plugins in the future.
@@ -67,7 +76,7 @@ export async function getFileBySlug(type: string, slug: string): Promise<FileDat
         rehypeSlug,
         rehypeAutolinkHeadings,
         rehypeKatex,
-        [rehypeCitation, { path: path.join(root, 'data') }],
+        // [rehypeCitation, { path: path.join(root, 'data') }],
         [rehypePrismPlus, { ignoreMissing: true }],
         rehypePresetMinify,
       ];

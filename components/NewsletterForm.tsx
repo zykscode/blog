@@ -1,5 +1,4 @@
 'use client'
-import siteMetadata from '#/lib/data/siteMetadata'
 import { useRef, useState } from 'react'
 
 type NewsletterFormProps = {
