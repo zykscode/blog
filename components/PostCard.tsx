@@ -14,7 +14,7 @@ const PostCard = ({ post }:Props) => {
       href={`/${post.slug}`}
     >
       <div className="collection-card-cover">
-       {post.images && <BlogImage src={post.images} alt={post.title!} />}
+       {post.images && <BlogImage img={post.images[0]} alt={post.title} />}
       </div>
       <div className="collection-card-body">
         <div className="collection-card-property">
