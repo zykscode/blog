@@ -12,7 +12,7 @@ import { siteMetadata } from '#/data/siteMetadata'
 
 import Analytics from '#/components/analytics'
 import { ClientReload } from '#/components/ClientReload'
-import Ly from '#/components/Ly'
+
 import LayoutWrapper from '#/components/LayoutWrapper'
 
 const isDevelopment = process.env.NODE_ENV === 'development'

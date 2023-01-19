@@ -52,9 +52,9 @@ export default function Home({ newPosts }) {
             <div className="gallery">
               <div className="gallery-view">
                 <div className="gallery-grid gallery-grid-size-medium">
-                {newPosts.map((post: { slug: any; images?: any; id?: string; content?: { markdown: string } | undefined; title?: string; date?: string | undefined; summary?: string; coverImage?: string | undefined; readingTime?: string | undefined; createdAt?: string | undefined; tags?: Tag[] }) => (
+                {newPosts.map((post: { slug: any; images?: any; id?: string; content?: { markdown: string } | undefined; title?: string; date?: string | undefined; summary?: string; coverImage?: string | undefined; readingTime?: string | undefined; createdAt?: string | undefined; tags?: Tag[] },i:number) => (
                   <PostCard
-                    key={post.title}
+                    key={post.title+i}
                     post={post}
                   />
                 ))}   
