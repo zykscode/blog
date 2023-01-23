@@ -93,7 +93,8 @@
     "tailwindcss": "",
     "unist-util-visit": "^4.0.0",
     "use-count-up": "3.0.1",
-    "use-delayed-render": "^0.0.7"
+    "use-delayed-render": "^0.0.7",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "12.1.4",
