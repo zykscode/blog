@@ -47,24 +47,24 @@ $font-family_3: var(--font);
 $font-family_4: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Noto Color Emoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
 $font-family_5: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
 $background-color_1: #fdfdfd;
-$background-color_2: var(--red_background);
-$background-color_3: var(--pink_background);
-$background-color_4: var(--blue_background);
-$background-color_5: var(--purple_background);
-$background-color_6: var(--teal_background);
-$background-color_7: var(--yellow_background);
-$background-color_8: var(--orange_background);
-$background-color_9: var(--brown_background);
-$background-color_10: var(--gray_background);
-$background-color_11: var(--red_background_co);
-$background-color_12: var(--pink_background_co);
-$background-color_13: var(--blue_background_co);
-$background-color_14: var(--purple_background_co);
-$background-color_15: var(--teal_background_co);
-$background-color_16: var(--yellow_background_co);
-$background-color_17: var(--orange_background_co);
-$background-color_18: var(--brown_background_co);
-$background-color_19: var(--gray_background_co);
+$background-color_2: var(--redBackground);
+$background-color_3: var(--pinkBackground);
+$background-color_4: var(--blueBackground);
+$background-color_5: var(--purpleBackground);
+$background-color_6: var(--tealBackground);
+$background-color_7: var(--yellowBackground);
+$background-color_8: var(--orangeBackground);
+$background-color_9: var(--brownBackground);
+$background-color_10: var(--grayBackground);
+$background-color_11: var(--redBackgroundCo);
+$background-color_12: var(--pinkBackgroundCo);
+$background-color_13: var(--blueBackgroundCo);
+$background-color_14: var(--purpleBackgroundCo);
+$background-color_15: var(--tealBackgroundCo);
+$background-color_16: var(--yellowBackgroundCo);
+$background-color_17: var(--orangeBackgroundCo);
+$background-color_18: var(--brownBackgroundCo);
+$background-color_19: var(--grayBackgroundCo);
 $background-color_20: var(--item-blue);
 $background-color_21: var(--item-orange);
 $background-color_22: var(--item-green);
@@ -447,24 +447,24 @@ pre {
 	--orange: #d9730d;
 	--brown: #64473a;
 	--gray: #9b9a97;
-	--red_background: #fbe4e4;
-	--pink_background: #f4dfeb;
-	--blue_background: #ddebf1;
-	--purple_background: #eae4f2;
-	--teal_background: #ddedea;
-	--yellow_background: #fbf3db;
-	--orange_background: #faebdd;
-	--brown_background: #e9e5e3;
-	--gray_background: #ebeced;
-	--red_background_co: hsla(0, 74%, 94%, .3);
-	--pink_background_co: rgba(244, 223, 235, .3);
-	--blue_background_co: rgba(221, 235, 241, .3);
-	--purple_background_co: rgba(234, 228, 242, .3);
-	--teal_background_co: rgba(221, 237, 234, .3);
-	--yellow_background_co: hsla(45, 80%, 92%, .3);
-	--orange_background_co: hsla(29, 74%, 92%, .3);
-	--brown_background_co: hsla(20, 12%, 90%, .3);
-	--gray_background_co: hsla(210, 5%, 93%, .3);
+	--redBackground: #fbe4e4;
+	--pinkBackground: #f4dfeb;
+	--blueBackground: #ddebf1;
+	--purpleBackground: #eae4f2;
+	--tealBackground: #ddedea;
+	--yellowBackground: #fbf3db;
+	--orangeBackground: #faebdd;
+	--brownBackground: #e9e5e3;
+	--grayBackground: #ebeced;
+	--redBackgroundCo: hsla(0, 74%, 94%, .3);
+	--pinkBackgroundCo: rgba(244, 223, 235, .3);
+	--blueBackgroundCo: rgba(221, 235, 241, .3);
+	--purpleBackgroundCo: rgba(234, 228, 242, .3);
+	--tealBackgroundCo: rgba(221, 237, 234, .3);
+	--yellowBackgroundCo: hsla(45, 80%, 92%, .3);
+	--orangeBackgroundCo: hsla(29, 74%, 92%, .3);
+	--brownBackgroundCo: hsla(20, 12%, 90%, .3);
+	--grayBackgroundCo: hsla(210, 5%, 93%, .3);
 	--item-blue: rgba(0, 120, 223, .2);
 	--item-orange: rgba(245, 93, 0, .2);
 	--item-green: rgba(0, 135, 107, .2);
@@ -501,79 +501,79 @@ pre {
 	--orange: #ffa344;
 	--brown: #937264;
 	--gray: hsla(195, 2%, 60%, .95);
-	--red_background: #594141;
-	--pink_background: #533b4c;
-	--blue_background: #364954;
-	--purple_background: #443f57;
-	--teal_background: #354c4b;
-	--yellow_background: #59563b;
-	--orange_background: #594a3a;
-	--brown_background: #434040;
-	--gray_background: #454b4e;
-	--red_background_co: rgba(89, 65, 65, .3);
-	--pink_background_co: rgba(83, 59, 76, .3);
-	--blue_background_co: rgba(120, 162, 187, .3);
-	--purple_background_co: rgba(68, 63, 87, .3);
-	--teal_background_co: rgba(53, 76, 75, .3);
-	--yellow_background_co: rgba(89, 86, 59, .3);
-	--orange_background_co: rgba(89, 74, 58, .3);
-	--brown_background_co: rgba(67, 64, 64, .3);
-	--gray_background_co: rgba(69, 75, 78, .3);
+	--redBackground: #594141;
+	--pinkBackground: #533b4c;
+	--blueBackground: #364954;
+	--purpleBackground: #443f57;
+	--tealBackground: #354c4b;
+	--yellowBackground: #59563b;
+	--orangeBackground: #594a3a;
+	--brownBackground: #434040;
+	--grayBackground: #454b4e;
+	--redBackgroundCo: rgba(89, 65, 65, .3);
+	--pinkBackgroundCo: rgba(83, 59, 76, .3);
+	--blueBackgroundCo: rgba(120, 162, 187, .3);
+	--purpleBackgroundCo: rgba(68, 63, 87, .3);
+	--tealBackgroundCo: rgba(53, 76, 75, .3);
+	--yellowBackgroundCo: rgba(89, 86, 59, .3);
+	--orangeBackgroundCo: rgba(89, 74, 58, .3);
+	--brownBackgroundCo: rgba(67, 64, 64, .3);
+	--grayBackgroundCo: rgba(69, 75, 78, .3);
 	.bookmark {
 		border-color: $border-color_5;
 	}
 	.callout {
 		border-color: $border-color_6;
 	}
-	.blue_background {
+	.blueBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.brown_background {
+	.brownBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.gray_background {
+	.grayBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.orange_background {
+	.orangeBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.pink_background {
+	.pinkBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.purple_background {
+	.purpleBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.red_background {
+	.redBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.teal_background {
+	.tealBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
 		background: none !important;
 	}
-	.yellow_background {
+	.yellowBackground {
 		padding: 0;
 		margin: 0;
 		border-radius: 0;
@@ -782,58 +782,58 @@ pre {
 .red {
 	color: $color_13;
 }
-.red_co {
+.redCo {
 	color: $color_13;
 }
 .pink {
 	color: $color_14;
 }
-.pink_co {
+.pinkCo {
 	color: $color_14;
 }
 .blue {
 	color: $color_15;
 }
-.blue_co {
+.blueCo {
 	color: $color_15;
 }
 .purple {
 	color: $color_16;
 }
-.purple_co {
+.purpleCo {
 	color: $color_16;
 }
 .teal {
 	color: $color_17;
 }
-.teal_co {
+.tealCo {
 	color: $color_17;
 }
 .yellow {
 	color: $color_18;
 }
-.yellow_co {
+.yellowCo {
 	color: $color_18;
 }
 .orange {
 	color: $color_19;
 }
-.orange_co {
+.orangeCo {
 	color: $color_19;
 }
 .brown {
 	color: $color_20;
 }
-.brown_co {
+.brownCo {
 	color: $color_20;
 }
 .gray {
 	color: $color_21;
 }
-.gray_co {
+.grayCo {
 	color: $color_21;
 }
-.red_background {
+.redBackground {
 	background-color: $background-color_2;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -845,7 +845,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #f5c4ff 10.5%, #e7a8fc 85.29%, var(--bg-color));
 }
-.pink_background {
+.pinkBackground {
 	background-color: $background-color_3;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -857,7 +857,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #f5b8d1 10.5%, #f9bcd3 85.29%, var(--bg-color));
 }
-.blue_background {
+.blueBackground {
 	background-color: $background-color_4;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -869,7 +869,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #adedfc 10.5%, #adebfd 85.29%, var(--bg-color));
 }
-.purple_background {
+.purpleBackground {
 	background-color: $background-color_5;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -881,7 +881,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #f5b8d1 10.5%, #f9bcd3 85.29%, var(--bg-color));
 }
-.teal_background {
+.tealBackground {
 	background-color: $background-color_6;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -893,7 +893,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #d4eabc 10.5%, #d2eabc 85.29%, var(--bg-color));
 }
-.yellow_background {
+.yellowBackground {
 	background-color: $background-color_7;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -904,7 +904,7 @@ pre {
 	background-color: $background-color_36;
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 }
-.orange_background {
+.orangeBackground {
 	background-color: $background-color_8;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -916,7 +916,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #f5c4ff 10.5%, #e7a8fc 85.29%, var(--bg-color));
 }
-.brown_background {
+.brownBackground {
 	background-color: $background-color_9;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -928,7 +928,7 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #96b8ec 10.5%, #a6c3f0 85.29%, var(--bg-color));
 }
-.gray_background {
+.grayBackground {
 	background-color: $background-color_10;
 	padding: 0 .5rem;
 	margin: 0 -.5rem 0 -.25rem;
@@ -940,31 +940,31 @@ pre {
 	background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 	background-image: linear-gradient(119deg, var(--bg-color), #adedfc 10.5%, #adebfd 85.29%, var(--bg-color));
 }
-.red_background_co {
+.redBackgroundCo {
 	background-color: $background-color_11;
 }
-.pink_background_co {
+.pinkBackgroundCo {
 	background-color: $background-color_12;
 }
-.blue_background_co {
+.blueBackgroundCo {
 	background-color: $background-color_13;
 }
-.purple_background_co {
+.purpleBackgroundCo {
 	background-color: $background-color_14;
 }
-.teal_background_co {
+.tealBackgroundCo {
 	background-color: $background-color_15;
 }
-.yellow_background_co {
+.yellowBackgroundCo {
 	background-color: $background-color_16;
 }
-.orange_background_co {
+.orangeBackgroundCo {
 	background-color: $background-color_17;
 }
-.brown_background_co {
+.brownBackgroundCo {
 	background-color: $background-color_18;
 }
-.gray_background_co {
+.grayBackgroundCo {
 	background-color: $background-color_19;
 }
 .item-blue {

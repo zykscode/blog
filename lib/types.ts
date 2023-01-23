@@ -38,3 +38,36 @@ export type BlurredImages = {
   width: number;
   type?: string | undefined;
 }
+
+
+export type CommonSEOProps ={
+  title: string;
+  description: string;
+  ogType: string;
+  ogImage: string | { url: string }[];
+  twImage: string;
+  canonicalUrl?: string;
+}
+
+
+export type PageSEOProps = {
+  title: string,
+  description: string
+}
+export type TagSEOProps = {
+  title: string,
+  description: string
+}
+export type BlogSEOProps = {
+  authorDetails?: { name:string }[],
+  title: string,
+  summary: string,
+  date: string,
+  lastmod?: string,
+  url: string,
+  images?: string[]|string,
+  canonicalUrl?: string
+}
+
+
+

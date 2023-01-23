@@ -144,3 +144,7 @@
   }
 
   
+
+  .flexGroup{
+    @apply mx-auto flex w-3/4 flex-col
+  }

@@ -1,8 +1,8 @@
 export const siteMetadata = {
-  title: 'Next.js Starter Blog',
+  title: 'A blog and more',
   author: 'Zyk',
   headerTitle: 'My log',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: 'A web log or blog as we know it',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',

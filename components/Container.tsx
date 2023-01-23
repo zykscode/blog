@@ -12,7 +12,7 @@ function Container(props: { [x: string]: any; children: any }) {
       <main className="page page-has-cover page-has-icon page-has-image-icon full-page index-page">
         <IconHero />
         <h1 className="title capitalize">
-          {(customData.tag && `${customData.tag} blog post`) || 'Zykson.com'}
+          {(customData.title && `${customData.title} `) || 'Zykson.com'}
         </h1>
         {children}
       </main>
