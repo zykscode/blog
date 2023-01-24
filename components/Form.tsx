@@ -195,7 +195,7 @@ const Form = ({ signin }: Props) => {
 export const RegisterForm = () => {
   const [visibility, setVisibility] = useState(false);
   const [cPassordVisibility, setCPassowrdvisibility] = useState(false);
-  
+
   const handleVisibilty = () => {
     return setVisibility(!visibility);
   };
@@ -204,8 +204,6 @@ export const RegisterForm = () => {
   };
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
       username: '',
       email: '',
       password: '',
@@ -224,28 +222,13 @@ export const RegisterForm = () => {
         </div>
         <input
           className={` ${styles.input_text}  ${
-            formik.touched.firstName && formik.errors.firstName
+            formik.touched.username && formik.errors.username
               ? ' border-[var(--red)] ring-[var(--red)]'
               : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
           }`}
           type="text"
-          placeholder="First Name"
-          {...formik.getFieldProps('firstName')}
-        />
-      </div>
-      <div className={styles.input_group}>
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <BiUser />
-        </div>
-        <input
-          className={` ${styles.input_text}  ${
-            formik.touched.lastName && formik.errors.lastName
-              ? ' border-[var(--red)] ring-[var(--red)]'
-              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
-          }`}
-          type="text"
-          placeholder="Last Name"
-          {...formik.getFieldProps('lastName')}
+          placeholder="Username"
+          {...formik.getFieldProps('username')}
         />
       </div>
       <div className={styles.input_group}>
@@ -267,21 +250,6 @@ export const RegisterForm = () => {
         />
       </div>
 
-      <div className={styles.input_group}>
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <BiUser />
-        </div>
-        <input
-          className={` ${styles.input_text}  ${
-            formik.touched.username && formik.errors.username
-              ? ' border-[var(--red)] ring-[var(--red)]'
-              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
-          }`}
-          type="text"
-          placeholder="Username"
-          {...formik.getFieldProps('username')}
-        />
-      </div>
       <div className={styles.input_group}>
         <span className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3 text-gray-500 dark:text-gray-400">
           <IoKey />
@@ -305,7 +273,9 @@ export const RegisterForm = () => {
           {!visibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
         </span>
       </div>
-      {formik.touched.password && formik.errors.password && <span className='text-sm text-red-400'>{formik.errors.password}</span>}
+      {formik.touched.password && formik.errors.password && (
+        <span className="text-sm text-red-400">{formik.errors.password}</span>
+      )}
       <div className={styles.input_group}>
         <span className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3 text-gray-500 dark:text-gray-400">
           <IoKey />
@@ -329,7 +299,9 @@ export const RegisterForm = () => {
           {!cPassordVisibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
         </span>
       </div>
-      {formik.touched.cpassword && formik.errors.cpassword && <span className='text-sm text-red-400'>{formik.errors.cpassword}</span>}
+      {formik.touched.cpassword && formik.errors.cpassword && (
+        <span className="text-sm text-red-400">{formik.errors.cpassword}</span>
+      )}
       {/* Login Buttons */}
       <div className={styles.input_button}>
         <button className={styles.button} type="submit">

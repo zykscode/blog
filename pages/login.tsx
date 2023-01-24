@@ -1,4 +1,5 @@
 import Form from '#/components/Form';
+import New from '#/components/new';
 import LoginLayout from '#/Layouts/LoginLayout';
 import { signIn } from 'next-auth/react';
 import React from 'react';

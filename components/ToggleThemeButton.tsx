@@ -31,6 +31,7 @@ const ToggleThemeButton = () => {
     React.useEffect(() => {
         setHasMounted(true)
     }, [])
+    console.log(theme)
     return (
         <>
             {hasMounted && (

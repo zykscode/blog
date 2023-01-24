@@ -1,5 +1,6 @@
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
-import { MongoClient } from 'mongodb'
+import { ConnectionOptions, MongoClient } from 'mongodb'
+import mongoose from 'mongoose';
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
@@ -28,3 +29,16 @@ if (process.env.NODE_ENV === 'development') {
 // Export a module-scoped MongoClient promise. By doing this in a
 // separate module, the client can be shared across functions.
 export default clientPromise
+
+
+export const connectToMongoDB = async (): Promise<void> => {
+ 
+    if (!process.env.MONGODB_URI) throw new Error('MONGODB_URI environment variable is missing');
+    try {
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log('MongoDB connected successfully');
+    } catch (error) {
+        console.log(`Error connecting to MongoDB: ${error}`);
+    }
+};
+
