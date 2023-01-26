@@ -157,39 +157,22 @@
   animation: move-cloud1 10s linear infinite;
 }
 
-#leaf {
-  animation: wind 2s linear infinite;
-}
-
-@keyframes wind  {
-
-  0%,
-  to {
-      transform: rotate(0)
-  }
-
-  20%,
-  60% {
-      transform: rotate(-2deg)
-  }
-
-  40%,
-  80% {
-      transform: rotate(1deg)
-  }
+#leaf,
+#leafPart1 {
+  display: none;
 }
 
 
-#zero, #zeroDot {
+
+#zero,
+#zeroDot {
   z-index: 20;
   animation:
     bounce alternate infinite cubic-bezier(.2, .65, .6, 1);
-  animation-duration: 4s;
+  animation-duration: 2.5s;
 }
 
-#lands{
-  animation: 3s linear 1s infinite alternate land;
-}
+
 
 @keyframes bounce {
   from {
@@ -213,14 +196,33 @@
 }
 
 @keyframes move-cloud1 {
-  from {
-    transform: translate(515px, 0);
+  0% {
+    transform: translate(600px, 0) scale(0.5);
+    opacity: 1;
+   
   }
 
-  to {
-    transform: translate(-600px, 0px);
+  30% {
+    opacity: 0.4;
+    transform: scale(1.2);
+    
+  }
+
+  70% {
+    opacity: 0.9 ;
+    transform: scale(1);
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-9px, 0px);
+    opacity: 0;
   }
 }
+
 @keyframes land {
   from {
     transform: translate(600px, 0);
