@@ -1,15 +1,36 @@
 import { connectToMongoDB } from "#/lib/mongodb";
+import { Users } from "#/models/Schema";
+import { hash } from 'bcryptjs'
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req,res){
-connectToMongoDB().catch(err=>res.json({
-    error:'Connection Failed!'
-}))
-
-if(req.method==='POST'){
-res.json({msg:'online'})
-}else{
-res.status(500).json({
-    messaga:"HTTP method not valid only POST Accepted"
-})
+const createUser = async (username: string, email: string, password: string) => {
+    // check existing user
+    const checkExisting = await Users.findOne({ email });
+    if (checkExisting) throw new Error("Email already exist");
+    // hashPassword
+    return await Users.create({ username, email, password: await hash(password, 12) });
 }
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    try {
+        await connectToMongoDB();
+    } catch (err) {
+        return res.status(500).json({ error: 'Connection Failed!' });
+    }
+
+    if (req.method === 'POST') {
+        if (!req.body) return res.status(404).json({ error: "Don't have Data Form" });
+
+        const { username, email, password } = req.body;
+        
+        try {
+            console.log(username)
+            const user = await createUser(username, email, password);
+            return res.status(201).json({ status: true, user });
+        } catch (error) {
+            return res.status(422).json({ error: error.message });
+        }
+    } else {
+        return res.status(405).json({ message: "HTTP method not valid only POST Accepted" });
+    }
 }

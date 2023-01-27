@@ -1,5 +1,4 @@
-import Form from '#/components/Form';
-import New from '#/components/new';
+import Form, { LoginForm } from '#/components/Form';
 import LoginLayout from '#/Layouts/LoginLayout';
 import { signIn } from 'next-auth/react';
 import React from 'react';
@@ -12,6 +11,8 @@ const Login = (props: Props) => {
       callbackUrl: 'http://localhost:3000',
     });
   };
+
+ 
   return (
     <>
       <LoginLayout>
@@ -20,7 +21,7 @@ const Login = (props: Props) => {
             <h2 className="title">Admin login</h2>
             <p> Sign in as an Admin</p>
           </div>
-          <Form signin={handleGoogleSignin}/>
+          <LoginForm signin={handleGoogleSignin}/>
         </section>
       </LoginLayout>
     </>

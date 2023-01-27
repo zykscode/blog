@@ -6,8 +6,9 @@ import { BiUser } from '@react-icons/all-files/bi/BiUser';
 import { IoKey } from '@react-icons/all-files/io5/IoKey';
 import { AiOutlineEye } from '@react-icons/all-files/ai/aiOutlineEye';
 import { AiOutlineEyeInvisible } from '@react-icons/all-files/ai/AiOutlineEyeInvisible';
-import Input from './Input';
 import * as Yup from 'yup';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 type Props = {
   signin: any;
@@ -22,21 +23,6 @@ interface SigninFormErrors {
   email?: string;
   password?: string;
 }
-
-const validates = (values: SigninFormValues): SigninFormErrors => {
-  const errors: SigninFormErrors = {};
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-
-  if (!values.password) {
-    errors.password = 'Enter your password';
-  }
-
-  return errors;
-};
 
 const signupSchema = Yup.object({
   firstName: Yup.string()
@@ -61,147 +47,39 @@ const signupSchema = Yup.object({
     ),
   cpassword: Yup.string().when('password', {
     is: (val: string) => (val && val.length > 0 ? true : false),
-    then: Yup.string().oneOf(
-      [Yup.ref('password')],
-      'Both password need to be the same',
-    ),
+    then: Yup.string().oneOf([Yup.ref('password')], "Password doesn't match"),
   }),
 });
-
-const Form = ({ signin }: Props) => {
-  const [visibility, setVisibility] = useState(false);
-  const handleVisibilty = () => {
-    return setVisibility(!visibility);
-  };
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validate: validates,
-    onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-  return (
-    <form className="flexGroup gap-5" onSubmit={formik.handleSubmit}>
-      <Input
-        formik={{
-          touched: 'email',
-          errors: 'email',
-          handleBlur: formik.handleBlur,
-          handleChange: formik.handleChange,
-          values: 'email',
-        }}
-        type={'text'}
-        name={'email'}
-        placeholder={'name@mail.com'}
-      >
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <IoMail />
-        </div>
-      </Input>
-      <div className={styles.input_group}>
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <IoMail />
-        </div>
-        <input
-          className={` ${styles.input_text}  ${
-            formik.touched.email && formik.errors.email
-              ? ' border-[var(--red)] ring-[var(--red)]'
-              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
-          }`}
-          type="email"
-          name="email"
-          placeholder="name@mail.com"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </div>
-      <div className={styles.input_group}>
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <BiUser />
-        </div>
-        <input
-          className={` ${styles.input_text}  ${
-            formik.touched.email && formik.errors.email
-              ? ' border-[var(--red)] ring-[var(--red)]'
-              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
-          }`}
-          type="text"
-          name="email"
-          placeholder="email"
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-      </div>
-      <Input
-        formik={{
-          touched: 'username',
-          errors: 'username',
-          handleBlur: formik.handleBlur,
-          handleChange: formik.handleChange,
-          values: 'username',
-        }}
-        type={'text'}
-        name={'username'}
-        placeholder={'Username'}
-      >
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
-          <BiUser />
-        </div>
-      </Input>
-      <Input
-        formik={{
-          touched: 'password',
-          errors: 'password',
-          handleBlur: formik.handleBlur,
-          handleChange: formik.handleChange,
-          values: 'password',
-        }}
-        type={visibility ? 'text' : 'password'}
-        name={'password'}
-        placeholder={'Password'}
-      >
-        <span className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3 text-gray-500 dark:text-gray-400">
-          <IoKey />
-        </span>
-
-        <span
-          className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
-          onClick={handleVisibilty}
-        >
-          {!visibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-        </span>
-      </Input>
-
-      {/* Login Buttons */}
-      <div className={styles.input_button}>
-        <button className={styles.button} type="submit">
-          Login
-        </button>
-      </div>
-      <div className={styles.input_button}>
-        <button onClick={signin} className={styles.custom_button}>
-          Sign with Google
-        </button>
-      </div>
-    </form>
-  );
-};
 
 export const RegisterForm = () => {
   const [visibility, setVisibility] = useState(false);
   const [cPassordVisibility, setCPassowrdvisibility] = useState(false);
-
+  const router = useRouter();
   const handleVisibilty = () => {
     return setVisibility(!visibility);
   };
   const handleCPasswordVisibilty = () => {
     return setCPassowrdvisibility(!cPassordVisibility);
   };
+
+  const onSubmit = async (values: {
+    email: string;
+    password: string;
+    username: string;
+    cpassword: string;
+  }) => {
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values),
+    };
+    await fetch('http://localhost:3000/api/auth/signup', options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) router.push('http://localhost:3000');
+      });
+  };
+
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -210,9 +88,7 @@ export const RegisterForm = () => {
       cpassword: '',
     },
     validationSchema: signupSchema,
-    onSubmit(values) {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit,
   });
   return (
     <form className="flexGroup gap-5" onSubmit={formik.handleSubmit}>
@@ -305,14 +181,93 @@ export const RegisterForm = () => {
       {/* Login Buttons */}
       <div className={styles.input_button}>
         <button className={styles.button} type="submit">
-          Login
+          Sign Up
         </button>
-      </div>
-      <div className={styles.input_button}>
-        <button className={styles.custom_button}>Sign with Google</button>
       </div>
     </form>
   );
 };
 
-export default Form;
+export const LoginForm = ({ signin }) => {
+  const [visibility, setVisibility] = useState(false);
+  const handleVisibilty = () => {
+    return setVisibility(!visibility);
+  };
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async (values: { email: string; password: string }) => {
+      const status = await signIn('credentials', {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+        callbackUrl: '/',
+      });
+
+      console.log(status);
+    },
+  });
+  return (
+    <form className="flexGroup gap-5" onSubmit={formik.handleSubmit}>
+      <div className={styles.input_group}>
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
+          <IoMail />
+        </div>
+        <input
+          className={` ${styles.input_text}  ${
+            formik.touched.email && formik.errors.email
+              ? ' border-[var(--red)] ring-[var(--red)]'
+              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
+          }`}
+          type="email"
+          name="email"
+          placeholder="name@mail.com"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+      </div>
+
+      <div className={styles.input_group}>
+        <span className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3 text-gray-500 dark:text-gray-400">
+          <IoKey />
+        </span>
+
+        <input
+          className={` ${styles.input_text}  ${
+            formik.touched.password && formik.errors.password
+              ? ' border-[var(--red)] ring-[var(--red)]'
+              : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
+          }`}
+          type={visibility ? 'text' : 'password'}
+          placeholder="Password"
+          {...formik.getFieldProps('password')}
+        />
+
+        <span
+          className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
+          onClick={handleVisibilty}
+        >
+          {!visibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+        </span>
+      </div>
+      {formik.touched.password && formik.errors.password && (
+        <span className="text-sm text-red-400">{formik.errors.password}</span>
+      )}
+
+      {/* Login Buttons */}
+      <div className={styles.input_button}>
+        <button className={styles.button} type="submit">
+          Login
+        </button>
+      </div>
+      <div className={styles.input_button}>
+        <button type="button" onClick={signin} className={styles.button_custom}>
+          Sign with Google
+        </button>
+      </div>
+    </form>
+  );
+};

@@ -3,58 +3,64 @@ import Me from '#/public/static/images/me.jpg';
 import Aside from '#/components/Aside';
 import { getSession, signOut, useSession } from 'next-auth/react';
 import { GetServerSideProps } from 'next';
-import { Session } from 'inspector';
 import { PageSEO } from '#/components/SEO';
+import { siteMetadata } from '#/data/siteMetadata';
+import { Session } from 'next-auth/core/types';
 
-export default function Home() {
+export default function Home({}) {
   const { data: session } = useSession();
   const handleSignOut = () => {
     signOut();
   };
   return (
     <>
-      <h2>We are home</h2>
+      {!session ? <Guest /> : <Author session={session} />}
       <button onClick={handleSignOut}>signOut</button>
     </>
   );
 }
 
 const Guest = () => {
-  <>
-    <PageSEO
-      title={siteMetadata.title}
-      description={siteMetadata.description}
-    />
+  return (
+    <>
+      <PageSEO
+        title={siteMetadata.title}
+        description={siteMetadata.description}
+      />
+      <Container coverWrapper={Me}>
+        <div className="page-content page-content-has-aside">
+          <article className="page-content-inner">
+            <div className="collection block">
+              <div className="collection-header">
+                <div className="collection-header-title">Blog Posts</div>
+              </div>
+            </div>
+          </article>
+          <Aside />
+        </div>
+      </Container>
+      ;
+    </>
+  );
+};
+
+export const Author = ({ session }: { session: Session }) => {
+  console.log(session, ': session');
+  return (
     <Container coverWrapper={Me}>
       <div className="page-content page-content-has-aside">
         <article className="page-content-inner">
           <div className="collection block">
             <div className="collection-header">
               <div className="collection-header-title">Blog Posts</div>
+              {session.user!.name}
             </div>
           </div>
         </article>
         <Aside />
       </div>
     </Container>
-    ;
-  </>;
-};
-
-const Author = ({ session, handleSignOut }: { session: Session }) => {
-  <Container coverWrapper={Me}>
-    <div className="page-content page-content-has-aside">
-      <article className="page-content-inner">
-        <div className="collection block">
-          <div className="collection-header">
-            <div className="collection-header-title">Blog Posts</div>
-            {session.user!.name}
-          </div>
-        </div>
-      </article>
-      <Aside />
-    </div>
-  </Container>;
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

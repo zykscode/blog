@@ -232,3 +232,101 @@
     transform: translate(-600px, 0px);
   }
 }
+
+
+.giest_container{
+  @apply flex flex-1 flex-col relative max-w-full min-w-[1px] items-stretch
+}
+
+.geist_container.nowrap {
+  flex-wrap: nowrap !important
+}
+
+.geist_container.inline {
+  display: inline-flex
+}
+.hero_gradient-button-wrapper .hero_button-bg {
+  border-radius: var(--geist-radius);
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: -2;
+}
+
+.hero_gradient-button-wrapper .hero_button-bg, .hero_gradient-button-wrapper .hero_button-bg:before {
+  background-image: linear-gradient(165deg,var(--start-color),var(--end-color));
+}
+
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-1{
+  animation: hero_background-1 8s infinite;
+}
+
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-1, .hero_gradient-button-wrappe .hero_button-bg.hero_bg-1:before {
+  --start-color: #00dfd8;
+  --end-color: #007cf0;
+}
+
+
+
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-3 {
+  animation: hero_background-3 8s infinite;
+}
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-2 {
+  animation: hero_background-2 8s infinite;
+}
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-2, .hero_gradient-button-wrapper .hero_button-bg.hero_bg-2:before {
+  --start-color: #ff0080;
+  --end-color: #7928ca;
+}
+.hero_gradient-button-wrapper .hero_button-bg, .hero_gradient-button-wrapper .hero_button-bg:before {
+  background-image: linear-gradient(165deg,var(--start-color),var(--end-color));
+}
+
+.hero_gradient-button-wrapper .hero_button-bg.hero_bg-3, .hero_gradient-button-wrapper .hero_button-bg.hero_bg-3:before {
+  --start-color: #ff4d4d;
+  --end-color: #f9cb28;
+}
+
+@keyframes hero_background-1 {
+
+  0%,
+  16.667%,
+  to {
+      opacity: 1
+  }
+
+  33%,
+  83.333% {
+      opacity: 0
+  }
+}
+
+@keyframes hero_background-2{
+
+  0%,
+  16.667%,
+  66.667%,
+  to {
+      opacity: 0
+  }
+
+  33.333%,
+  50% {
+      opacity: 1
+  }
+}
+
+@keyframes hero_background-3 {
+
+  0%,
+  50%,
+  to {
+      opacity: 0
+  }
+
+  66.667%,
+  83.333% {
+      opacity: 1
+  }
+}
