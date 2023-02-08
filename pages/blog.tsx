@@ -9,7 +9,7 @@ import { graphcms } from '#/services/_graphcms';
 
 const blurImages = async (
   photos: { id: any; coverPhoto: CoverImage }[],
-): Promise<BlurredPhoto[]> => {git
+): Promise<BlurredPhoto[]> => {
   const images = await Promise.all(
     photos.map(async (image) => {
       const { base64, img } = await getPlaiceholder(image.coverPhoto.url);
