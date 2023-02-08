@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import styles from '#/styles/Form.module.scss';
-import { Formik, useFormik } from 'formik';
-import { IoMail } from '@react-icons/all-files/io5/IoMail';
-import { BiUser } from '@react-icons/all-files/bi/BiUser';
-import { IoKey } from '@react-icons/all-files/io5/IoKey';
 import { AiOutlineEye } from '@react-icons/all-files/ai/aiOutlineEye';
 import { AiOutlineEyeInvisible } from '@react-icons/all-files/ai/AiOutlineEyeInvisible';
-import * as Yup from 'yup';
-import { signIn } from 'next-auth/react';
+import { BiUser } from '@react-icons/all-files/bi/BiUser';
+import { IoKey } from '@react-icons/all-files/io5/IoKey';
+import { IoMail } from '@react-icons/all-files/io5/IoMail';
+import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
+
+import styles from '#/styles/Form.module.scss';
 
 type Props = {
   signin: any;
@@ -46,7 +47,7 @@ const signupSchema = Yup.object({
       'Password must contain at least one Uppercase, lowercase, number and special character',
     ),
   cpassword: Yup.string().when('password', {
-    is: (val: string) => (val && val.length > 0 ? true : false),
+    is: (val: string) => !!(val && val.length > 0),
     then: Yup.string().oneOf([Yup.ref('password')], "Password doesn't match"),
   }),
 });
@@ -85,7 +86,7 @@ export const RegisterForm = () => {
       username: '',
       email: '',
       password: '',
-      cpassword: '',
+      cpassword: ' ',
     },
     validationSchema: signupSchema,
     onSubmit,
@@ -188,7 +189,7 @@ export const RegisterForm = () => {
   );
 };
 
-export const LoginForm = ({ signin }) => {
+export const LoginForm = ({ signin }: { signin: () => Promise<void> }) => {
   const [visibility, setVisibility] = useState(false);
   const handleVisibilty = () => {
     return setVisibility(!visibility);

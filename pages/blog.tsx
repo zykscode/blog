@@ -1,43 +1,86 @@
+import { getPlaiceholder } from 'plaiceholder';
 
-import { getAllFilesFrontMatter } from '#/lib/mdx';
-import { getPlaiceholder, IGetPlaiceholderReturn } from 'plaiceholder';
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
 import ListLayout from '#/layouts/ListLayout';
+import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
+import { graphcms } from '#/services/_graphcms';
+import { getPostsPhotos, indexPageQuery } from '#/services/Index';
 
-
-const MAX_DISPLAY = 5;
-
-const blurImages = async (photo: any) => {
-  const { base64, img } = await getPlaiceholder(photo);
-  return {
-    ...img,
-    base64,
-  };
+const blurImages = async (
+  photos: { id: any; coverPhoto: CoverImage }[],
+): Promise<BlurredPhoto[]> => {
+  console.log(photos, 'photosooss');
+  const images = await Promise.all(
+    photos.map(async (image) => {
+      const { base64, img } = await getPlaiceholder(image.coverPhoto.url);
+      return {
+        ...img,
+        base64,
+        postId: image.id,
+      };
+    }),
+  );
+  return images;
 };
 
 export async function getStaticProps() {
-  let posts = await getAllFilesFrontMatter('blog');
-  const newPosts = await Promise.all(posts.map(async (post) => {
-    if (post.images) {
-      const blurredImages = await Promise.all(post.images.map(async (image: string | Buffer) => {
-        return await blurImages(image);
-      }));
-      return { ...post, images: blurredImages };
-    } else {
-      return post;
+  async function fetchPosts() {
+    let offset = 0;
+    let hasNextPage = true;
+    const limit = 3;
+
+    const allPosts = [];
+
+    while (hasNextPage) {
+      // eslint-disable-next-line no-await-in-loop
+      const response = await graphcms.request(indexPageQuery, {
+        limit,
+        offset,
+      });
+
+      const {
+        postsConnection: { posts, pageInfo },
+      } = response;
+
+      hasNextPage = pageInfo.hasNextPage;
+      offset += limit;
+
+      allPosts.push(...posts);
     }
-  }));
- 
-  return { props: { newPosts } };
+
+    return allPosts;
+  }
+
+  const posts = await (await fetchPosts()).map(({ node }) => node);
+  const responsePhotos = await getPostsPhotos();
+  const photos: { id: string; coverPhoto: CoverImage }[] = responsePhotos.posts;
+  const blurredPhotos = await blurImages(photos);
+
+  return {
+    props: {
+      posts,
+      blurredPhotos,
+    },
+  };
 }
 
+export default function Home({
+  posts,
+  blurredPhotos,
+}: {
+  posts: Post[];
+  blurredPhotos: BlurredPhoto[];
+}) {
+  console.log(posts[0]);
 
-export default function Home({ newPosts }) {
   return (
     <>
-    <PageSEO title={`${siteMetadata.author}'s blog`} description={siteMetadata.description}/>
-   <ListLayout posts={newPosts}/>
+      <PageSEO
+        title={`${siteMetadata.author}'s blog`}
+        description={siteMetadata.description}
+      />
+      <ListLayout coverImage={blurredPhotos} posts={posts} />
     </>
   );
 }

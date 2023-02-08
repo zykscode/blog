@@ -1,16 +1,20 @@
-import React from 'react';
 import Image from 'next/image';
-import { BlurredImages } from '#/lib/types';
-import { blurPhotos } from '#/lib/utils/blurImages';
+import React from 'react';
 
+import type { BlurredPhoto } from '#/lib/types';
 
-
-function BlogImage({ img,alt }: {img:BlurredImages, alt:string}) {
-const {width,base64,height,src} =img
+function BlogImage({ imgSrc, alt }: { imgSrc: BlurredPhoto; alt: string }) {
+  const { width, base64, src } = imgSrc;
   return (
     <>
-  
-      <Image src={src} width={width} height={width} alt={alt} placeholder='blur' blurDataURL={base64}/>
+      <Image
+        src={src}
+        width={width}
+        height={width}
+        alt={alt}
+        placeholder="blur"
+        blurDataURL={base64}
+      />
     </>
   );
 }

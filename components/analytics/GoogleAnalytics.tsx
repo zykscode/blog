@@ -1,14 +1,15 @@
-import { siteMetadata } from '#/data/siteMetadata'
-import Script from 'next/script'
+import Script from 'next/script';
 
-const GAScript = () => {
+import { siteMetadata } from '#/data/siteMetadata';
+import type { WindowWithGtag } from '#/lib/types';
+
+const GAScript: React.FC = () => {
   return (
     <>
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
       />
-
       <Script strategy="lazyOnload" id="ga-script">
         {`
             window.dataLayer = window.dataLayer || [];
@@ -20,16 +21,24 @@ const GAScript = () => {
         `}
       </Script>
     </>
-  )
-}
+  );
+};
 
-export default GAScript
+export default GAScript;
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const logEvent = (action, category, label, value) => {
-  window.gtag?.('event', action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  })
-}
+export const logEvent = (
+  action: string,
+  category: string,
+  label?: string,
+  value?: number,
+) => {
+  const windowWithGtag = window as unknown as WindowWithGtag;
+  if (windowWithGtag.gtag) {
+    windowWithGtag.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value,
+    });
+  }
+};

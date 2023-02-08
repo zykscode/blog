@@ -1,7 +1,9 @@
-import Script from 'next/script'
-import { siteMetadata } from '#/data/siteMetadata'
+import Script from 'next/script';
+import React from 'react';
 
-const PlausibleScript = () => {
+import { siteMetadata } from '#/data/siteMetadata';
+
+const PlausibleScript: React.FC = () => {
   return (
     <>
       <Script
@@ -15,12 +17,21 @@ const PlausibleScript = () => {
         `}
       </Script>
     </>
-  )
-}
+  );
+};
 
-export default PlausibleScript
+export default PlausibleScript;
+
+declare global {
+  interface WindowWithPlausible extends Window {
+    plausible: (...args: any[]) => void;
+  }
+}
 
 // https://plausible.io/docs/custom-event-goals
-export const logEvent = (eventName, ...rest) => {
-  return window.plausible?.(eventName, ...rest)
-}
+export const logEvent = (eventName: string, ...rest: any[]) => {
+  const windowWithPlausible = window as unknown as WindowWithPlausible;
+  if (windowWithPlausible.plausible) {
+    return windowWithPlausible.plausible(eventName, ...rest);
+  }
+};

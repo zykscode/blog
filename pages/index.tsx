@@ -1,11 +1,12 @@
-import Container from '#/components/Container';
-import Me from '#/public/static/images/me.jpg';
-import Aside from '#/components/Aside';
+import type { GetServerSideProps } from 'next';
+import type { Session } from 'next-auth/core/types';
 import { getSession, signOut, useSession } from 'next-auth/react';
-import { GetServerSideProps } from 'next';
+
+import Aside from '#/components/Aside';
+import Container from '#/components/Container';
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
-import { Session } from 'next-auth/core/types';
+import Me from '#/public/static/images/me.jpg';
 
 export default function Home({}) {
   const { data: session } = useSession();
