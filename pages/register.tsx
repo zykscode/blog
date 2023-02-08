@@ -1,24 +1,22 @@
-import Form, { RegisterForm } from '#/components/Form'
-import LoginLayout from '#/Layouts/LoginLayout'
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+import { RegisterForm } from '#/components/Form';
+import LoginLayout from '#/Layouts/LoginLayout';
 
-const Register = (props: Props) => {
+const Register = () => {
   return (
     <>
-    <LoginLayout>
-    <section className="flexGroup gap-10">
+      <LoginLayout>
+        <section className="flexGroup gap-10">
           <div>
             <h2 className="title">Admin Registration</h2>
             <p> Register as an Admin</p>
           </div>
-          <RegisterForm/>
+          <RegisterForm />
         </section>
-        
-    </LoginLayout>
+      </LoginLayout>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import CoverWrapper from './CoverWrapper';
 import { Footer } from './Footer';
 import IconHero from './IconHero';

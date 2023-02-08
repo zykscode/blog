@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-
-import { IoMail } from '@react-icons/all-files/io5/IoMail';
-import { HiOutlineCloudUpload} from '@react-icons/all-files/hi/HiOutlineCloudUpload';
-import { MdOutlineWbCloudy } from 'react-icons/md';
+import { HiOutlineCloudUpload } from '@react-icons/all-files/hi/HiOutlineCloudUpload';
+import React from 'react';
 import { IoCloudSharp } from 'react-icons/io5';
+import { MdOutlineWbCloudy } from 'react-icons/md';
 
-
-type Props = {}
-
-const New = (props: Props) => {
+const New = () => {
   return (
     <div>
-      <HiOutlineCloudUpload/>
-      <MdOutlineWbCloudy/>
-      <IoCloudSharp/>
+      <HiOutlineCloudUpload />
+      <MdOutlineWbCloudy />
+      <IoCloudSharp />
     </div>
-  )
-}
+  );
+};
 
-export default New
+export default New;

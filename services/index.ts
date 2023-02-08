@@ -23,30 +23,6 @@ export const getProjects = async (): Promise<any> => {
       `);
 };
 
-export const getProject = async () => {
-  return graphcms.request(
-    `
-    
-        query ProjectPageQuery($slug:string){
-        project(where: { slug: $slug }) {
-          name
-          tags
-          slug
-          createdAt
-          description
-          demo
-          sourceCode
-          image {
-            url
-          }
-        }
-      }`,
-    {
-      slug: params.slug,
-    },
-  );
-};
-
 export const indexPageQuery = gql`
   query indexPageQuery($limit: Int!, $offset: Int!) {
     postsConnection(first: $limit, skip: $offset, orderBy: publishedAt_DESC) {
@@ -84,8 +60,8 @@ export const indexPageQuery = gql`
     }
   }
 `;
-export const blogPageQuery = async ({ params }) => {
-  const limit = 3;
+export const blogPageQuery = async ({ params }: { params: any }) => {
+  const limit = 1;
   return graphcms.request(
     `
     query blogPageQuery($limit: Int!, $offset: Int!) {
@@ -120,7 +96,7 @@ export const blogPageQuery = async ({ params }) => {
         }
         pageInfo {
           hasNextPage
-          hasPrevious
+          hasPreviousPage
         }
       }
     }
@@ -159,7 +135,7 @@ export const getPostsPhotos = async () => {
   );
 };
 
-export const getPost = async (params) => {
+export const getPost = async ({ params }: { params: any }) => {
   return graphcms.request(
     `
         query PostPageQuery($slug:String){
@@ -204,7 +180,7 @@ export const getPostPaths = async () => {
     `);
 };
 
-export const getTagPosts = async (params) => {
+export const getTagPosts = async ({ params }: { params: any }) => {
   return graphcms.request(
     `
   query getTagPosts($name:String){
@@ -237,9 +213,6 @@ export const getTagPosts = async (params) => {
 };
 
 export const getTagsPaths = async () => {
-  const graphcms = new GraphQLClient(
-    'https://api-eu-central-1.hygraph.com/v2/cl6zaoh5c087901uhd1zdga18/master',
-  );
   return graphcms.request(`
   {
     tags{
@@ -252,7 +225,7 @@ export const getTagsPaths = async () => {
   `);
 };
 
-export const getOwnersDetails = async (params) => {
+export const getOwnersDetails = async () => {
   return graphcms.request(
     `
   

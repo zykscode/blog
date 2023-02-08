@@ -34,4 +34,5 @@ export const logEvent = (eventName: string, ...rest: any[]) => {
   if (windowWithPlausible.plausible) {
     return windowWithPlausible.plausible(eventName, ...rest);
   }
+  return -1;
 };

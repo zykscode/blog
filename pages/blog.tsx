@@ -2,15 +2,14 @@ import { getPlaiceholder } from 'plaiceholder';
 
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
-import ListLayout from '#/layouts/ListLayout';
+import ListLayout from '#/Layouts/ListLayout';
 import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
+import { getPostsPhotos, indexPageQuery } from '#/services';
 import { graphcms } from '#/services/_graphcms';
-import { getPostsPhotos, indexPageQuery } from '#/services/Index';
 
 const blurImages = async (
   photos: { id: any; coverPhoto: CoverImage }[],
-): Promise<BlurredPhoto[]> => {
-  console.log(photos, 'photosooss');
+): Promise<BlurredPhoto[]> => {git
   const images = await Promise.all(
     photos.map(async (image) => {
       const { base64, img } = await getPlaiceholder(image.coverPhoto.url);
@@ -72,8 +71,6 @@ export default function Home({
   posts: Post[];
   blurredPhotos: BlurredPhoto[];
 }) {
-  console.log(posts[0]);
-
   return (
     <>
       <PageSEO

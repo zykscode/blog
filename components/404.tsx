@@ -1,10 +1,11 @@
 import * as React from 'react';
+
 type Props = {
   theme: string | undefined;
 };
 const FourZeroFour = ({ theme }: Props) => (
   <svg
-    className="overflow-clip max-[645px] max-h-[428px] w-full"
+    className="max-[645px] max-h-[428px] w-full text-clip"
     viewBox="0 0 645 428"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +23,7 @@ const FourZeroFour = ({ theme }: Props) => (
       >
         <path
           d="M396 432H136c-36.44 0-70.36-12.57-95.51-35.41C14.38 372.88 0 340 0 304c0-36.58 13.39-68.12 38.72-91.22 19.93-18.19 47.12-30.56 77.38-35.37a156.42 156.42 0 0145.22-63.61C187.76 91.69 220.5 80 256 80a153.57 153.57 0 01107.14 42.9c27.06 26.06 44.59 61.28 51.11 102.46C463.56 232.66 512 266.15 512 328c0 33.39-12.24 60.78-35.41 79.23C456.23 423.43 428.37 432 396 432z"
-          fill='#F0F0F0'
+          fill="#F0F0F0"
         />
       </svg>
     </g>
@@ -73,7 +74,7 @@ const FourZeroFour = ({ theme }: Props) => (
       <path
         id="moon"
         d="M486.607 76.4355C507.696 76.4355 524.792 59.3249 524.792 38.2178C524.792 17.1107 507.696 0 486.607 0C465.518 0 448.422 17.1107 448.422 38.2178C448.422 59.3249 465.518 76.4355 486.607 76.4355Z"
-        fill={theme == 'light' ? '#fcfcb0' : 'var(--fg-color-2)'}
+        fill={theme === 'light' ? '#fcfcb0' : 'var(--fg-color-2)'}
         className="z-20 "
       />
 

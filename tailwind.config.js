@@ -1,5 +1,5 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   experimental: {
@@ -164,5 +164,6 @@ module.exports = {
       }),
     },
   },
+  // eslint-disable-next-line global-require
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
-}
+};

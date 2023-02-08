@@ -1,15 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
+
 import Search from './Search';
 import ToggleThemeButton from './ToggleThemeButton';
-
-type Props = {};
 
 const isSearchEnabled = true;
 
 const navs = ['blog', 'tags', 'contact'];
 
-const Navs = (props: Props) => {
+const Navs = () => {
   console.log({ todo: 'Navs' });
   return (
     <nav className="nav-header-rhs breadcrumbs">

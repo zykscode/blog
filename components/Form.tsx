@@ -11,20 +11,6 @@ import * as Yup from 'yup';
 
 import styles from '#/styles/Form.module.scss';
 
-type Props = {
-  signin: any;
-};
-
-interface SigninFormValues {
-  email: string;
-  password: string;
-}
-
-interface SigninFormErrors {
-  email?: string;
-  password?: string;
-}
-
 const signupSchema = Yup.object({
   firstName: Yup.string()
     .min(2, 'Too Short!')
@@ -43,7 +29,7 @@ const signupSchema = Yup.object({
     .required('No password provided.')
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .matches(
-      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#\$%\^&\*])(?=.*\d)(?=.{8,})/,
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d)(?=.{8,})/,
       'Password must contain at least one Uppercase, lowercase, number and special character',
     ),
   cpassword: Yup.string().when('password', {

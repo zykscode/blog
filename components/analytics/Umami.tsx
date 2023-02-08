@@ -1,6 +1,7 @@
-import React from "react";
-import Script from "next/script";
-import { siteMetadata } from "#/data/siteMetadata";
+import Script from 'next/script';
+import React from 'react';
+
+import { siteMetadata } from '#/data/siteMetadata';
 
 const UmamiScript: React.FC = () => {
   return (

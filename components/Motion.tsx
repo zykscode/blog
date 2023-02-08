@@ -1,9 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import styles from './PageSocial.module.css';
 import cs from 'classnames';
+import { motion } from 'framer-motion';
 import React from 'react';
+
+import styles from './PageSocial.module.css';
 
 type Props = {
   href: string;

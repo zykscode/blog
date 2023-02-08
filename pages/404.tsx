@@ -1,12 +1,9 @@
-import ErrorLayout from '#/Layouts/ErrorLayout'
-import React from 'react'
+import React from 'react';
 
-type Props = {}
+import ErrorLayout from '#/Layouts/ErrorLayout';
 
-function NotFound({}: Props) {
-  return (
-    <ErrorLayout/>
-  )
+function NotFound() {
+  return <ErrorLayout />;
 }
 
-export default NotFound
+export default NotFound;

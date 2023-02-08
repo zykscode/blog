@@ -1,11 +1,10 @@
 'use client';
 
 import React from 'react';
+
 import { PageSocial } from './PageSocial';
 
-type Props = {};
-
-const Aside = (props: Props) => {
+const Aside = () => {
   return (
     <aside className="aside">
       <PageSocial />

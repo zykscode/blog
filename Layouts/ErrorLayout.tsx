@@ -1,19 +1,19 @@
+import { useTheme } from 'next-themes';
+import React from 'react';
+
 import FourZeroFour from '#/components/404';
 import { Footer } from '#/components/Footer';
-import { useTheme } from 'next-themes';
-import React from 'react'
 
-function ErrorLayout({}) {
-  const { theme} = useTheme()
+function ErrorLayout() {
+  const { theme } = useTheme();
   return (
     <div className="page-scroller ">
-    <section className="m-auto bg-[var(--blueBackground)] grid min-h-3/4 rounded-2xl w-5/6 md:w-3/5 ">
-    <FourZeroFour theme={theme}/>
-    </section>
-    <Footer />
-  </div>
-
-  )
+      <section className="min-h-3/4 m-auto grid w-5/6 rounded-2xl bg-[var(--blueBackground)] md:w-3/5 ">
+        <FourZeroFour theme={theme} />
+      </section>
+      <Footer />
+    </div>
+  );
 }
 
-export default ErrorLayout
+export default ErrorLayout;

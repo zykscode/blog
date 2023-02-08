@@ -1,4 +1,6 @@
-import React, { Children, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
+
 import styles from '#/styles/Form.module.scss';
 
 interface Props {
@@ -12,10 +14,16 @@ interface Props {
   type: string;
   name: string;
   placeholder: string;
-  children:ReactNode
+  children: ReactNode;
 }
 
-const Input: React.FC<Props> = ({ formik, type, name, placeholder,children }) => {
+const Input: React.FC<Props> = ({
+  formik,
+  type,
+  name,
+  placeholder,
+  children,
+}) => {
   return (
     <div className={styles.input_group}>
       {children}

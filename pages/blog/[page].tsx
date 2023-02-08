@@ -1,9 +1,11 @@
+/* eslint-disable import/no-unresolved */
+import type { Post } from '#/lib/types';
 import { blogPageQuery, blogPageStaticPaths } from '#/services';
 
-export async function getStaticPaths({ params }) {
+export async function getStaticProps({ params }: { params: any }) {
   const {
     postsConnection: { posts, pageInfo },
-  } = await blogPageQuery(params);
+  } = await blogPageQuery({ params });
   return {
     props: {
       currentPageNumber: Number(params.page),
@@ -16,7 +18,7 @@ export async function getStaticPaths({ params }) {
 export async function getStaticPaths() {
   const { postsConnection } = await blogPageStaticPaths();
 
-  function* numberOfPages({ total, limit }) {
+  function* numberOfPages({ total, limit }: { total: number; limit: number }) {
     let page = 1;
     let offset = 0;
 
@@ -27,6 +29,8 @@ export async function getStaticPaths() {
       offset += limit;
     }
   }
+
+  const limit = 1;
 
   const paths = [
     ...numberOfPages({
@@ -43,10 +47,23 @@ export async function getStaticPaths() {
   };
 }
 
-function BlogPage({ currentPageNumber, hasNextPage, hasPreviousPage, posts }) {
+function BlogPage({
+  currentPageNumber,
+  hasNextPage,
+  hasPreviousPage,
+  _posts,
+}: {
+  currentPageNumber: number;
+  hasPreviousPage: boolean;
+  _posts: Post[];
+  hasNextPage: boolean;
+}) {
+  console.log(hasNextPage, hasPreviousPage, currentPageNumber);
   return (
     <>
       <h1>blog paeg</h1>
     </>
   );
 }
+
+export default BlogPage;

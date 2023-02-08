@@ -18,7 +18,6 @@ type TOCInlineProps = {
 const TOCInline = (props: TOCInlineProps) => {
   const {
     toc,
-    indentDepth = 3,
     fromHeading = 1,
     toHeading = 6,
     asDisclosure = false,
@@ -39,13 +38,14 @@ const TOCInline = (props: TOCInlineProps) => {
   const marginTop = (heading: number) => {
     if (heading === 1) {
       return '0';
-    } else if (heading === 2) {
-      return '16px';
-    } else if (heading === 3) {
-      return '24px';
-    } else {
-      return '32px';
     }
+    if (heading === 2) {
+      return '16px';
+    }
+    if (heading === 3) {
+      return '24px';
+    }
+    return '32px';
   };
 
   const tocList = (
@@ -72,13 +72,11 @@ const TOCInline = (props: TOCInlineProps) => {
     </>
   );
 
- 
-
   return (
     <>
       {asDisclosure ? (
         <details open>
-          <summary className="ml-6 pt-2 pb-2 text-xl font-bold">
+          <summary className="ml-6 py-2 text-xl font-bold">
             Table of Contents
           </summary>
           <div className="ml-6">{tocList}</div>

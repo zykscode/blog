@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
 import { siteMetadata } from '#/data/siteMetadata';
-import {
+import type {
   BlogSEOProps,
   CommonSEOProps,
   PageSEOProps,
@@ -44,11 +46,7 @@ const CommonSEO: React.FC<CommonSEOProps> = ({
       <meta name="twitter:image" content={twImage} />
       <link
         rel="canonical"
-        href={
-          canonicalUrl
-            ? canonicalUrl
-            : `${siteMetadata.siteUrl}${router.asPath}`
-        }
+        href={canonicalUrl || `${siteMetadata.siteUrl}${router.asPath}`}
       />
     </Head>
   );
@@ -103,10 +101,9 @@ export const BlogSEO: React.FC<BlogSEOProps> = ({
   images = [],
   canonicalUrl,
 }) => {
-  const router = useRouter();
   const publishedAt = new Date(date).toISOString();
   const modifiedAt = new Date(lastmod || date).toISOString();
-  let imagesArr =
+  const imagesArr =
     images.length === 0
       ? [siteMetadata.socialBanner]
       : typeof images === 'string'
@@ -120,7 +117,9 @@ export const BlogSEO: React.FC<BlogSEOProps> = ({
     };
   });
 
-  let authorList: { '@type': 'Person'; name: string }[] | { '@type': 'Person'; name: string } =
+  const authorList:
+    | { '@type': 'Person'; name: string }[]
+    | { '@type': 'Person'; name: string } =
     authorDetails && authorDetails.length > 0
       ? authorDetails.map((author) => {
           return {

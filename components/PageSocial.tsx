@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import * as config from '#/lib/config';
-import styles from './PageSocial.module.css';
+
 import Motion from './Motion';
+import styles from './PageSocial.module.css';
 
 type SocialProps = Socials[];
 type Socials = {

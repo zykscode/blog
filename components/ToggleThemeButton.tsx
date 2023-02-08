@@ -1,52 +1,52 @@
-'use client'
+'use client';
 
-import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline'
-import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp'
-import React, { useState } from 'react'
-import { useTheme } from 'next-themes'
-import { useDarkMode } from '#/lib/use-dark-mode'
-import styles from './styles.module.css'
+import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp';
+import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline';
+import { useTheme } from 'next-themes';
+import React, { useState } from 'react';
 
-type Props = {}
+import { useDarkMode } from '#/lib/use-dark-mode';
+
+import styles from './styles.module.css';
 
 const ToggleThemeButton = () => {
-    const [hasMounted, setHasMounted] = useState(false)
-    const { isDarkMode, toggleDarkMode } = useDarkMode()
+  const [hasMounted, setHasMounted] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-    const { systemTheme, theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
-    const onToggleDarkMode = React.useCallback(
-        (e: { preventDefault: () => void }) => {
-            e.preventDefault()
-            if (isDarkMode) {
-                setTheme('light')
-            } else {
-                setTheme('dark')
-            }
-            toggleDarkMode()
-        },
-        [isDarkMode, setTheme, toggleDarkMode]
-    )
+  const onToggleDarkMode = React.useCallback(
+    (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+      if (isDarkMode) {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+      toggleDarkMode();
+    },
+    [isDarkMode, setTheme, toggleDarkMode],
+  );
 
-    React.useEffect(() => {
-        setHasMounted(true)
-    }, [])
-    console.log(theme)
-    return (
-        <>
-            {hasMounted && (
-                <a
-                    className={styles.toggleDarkMode}
-                    href="#"
-                    role="button"
-                    onClick={onToggleDarkMode}
-                    title="Toggle dark mode"
-                >
-                    {isDarkMode ? <IoSunnyOutline /> : <IoMoonSharp />}
-                </a>
-            )}
-        </>
-    )
-}
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  console.log(theme);
+  return (
+    <>
+      {hasMounted && (
+        <a
+          className={styles.toggleDarkMode}
+          href="#"
+          role="button"
+          onClick={onToggleDarkMode}
+          title="Toggle dark mode"
+        >
+          {isDarkMode ? <IoSunnyOutline /> : <IoMoonSharp />}
+        </a>
+      )}
+    </>
+  );
+};
 
-export default ToggleThemeButton
+export default ToggleThemeButton;

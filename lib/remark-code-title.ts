@@ -1,32 +1,35 @@
-import { visit } from 'unist-util-visit'
+/* eslint-disable no-param-reassign */
+import { visit } from 'unist-util-visit';
 
 export default function remarkCodeTitles() {
   return (tree: any) =>
     visit(tree, 'code', (node, index, parent) => {
-      const nodeLang = node.lang || ''
-      let language = ''
-      let title = ''
+      const nodeLang = node.lang || '';
+      let language = '';
+      let title = '';
 
       if (nodeLang.includes(':')) {
-        language = nodeLang.slice(0, nodeLang.search(':'))
-        title = nodeLang.slice(nodeLang.search(':') + 1, nodeLang.length)
+        language = nodeLang.slice(0, nodeLang.search(':'));
+        title = nodeLang.slice(nodeLang.search(':') + 1, nodeLang.length);
       }
 
       if (!title) {
-        return
+        return;
       }
 
-      const className = 'remark-code-title'
+      const className = 'remark-code-title';
 
       const titleNode = {
         type: 'mdxJsxFlowElement',
         name: 'div',
-        attributes: [{ type: 'mdxJsxAttribute', name: 'className', value: className }],
+        attributes: [
+          { type: 'mdxJsxAttribute', name: 'className', value: className },
+        ],
         children: [{ type: 'text', value: title }],
         data: { _xdmExplicitJsx: true },
-      }
+      };
 
-      parent.children.splice(index, 0, titleNode)
-      node.lang = language
-    })
+      parent.children.splice(index, 0, titleNode);
+      node.lang = language;
+    });
 }

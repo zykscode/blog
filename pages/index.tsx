@@ -8,19 +8,6 @@ import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
 import Me from '#/public/static/images/me.jpg';
 
-export default function Home({}) {
-  const { data: session } = useSession();
-  const handleSignOut = () => {
-    signOut();
-  };
-  return (
-    <>
-      {!session ? <Guest /> : <Author session={session} />}
-      <button onClick={handleSignOut}>signOut</button>
-    </>
-  );
-}
-
 const Guest = () => {
   return (
     <>
@@ -78,3 +65,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     props: { session },
   };
 };
+
+export default function Home() {
+  const { data: session } = useSession();
+  const handleSignOut = () => {
+    signOut();
+  };
+  return (
+    <>
+      {!session ? <Guest /> : <Author session={session} />}
+      <button onClick={handleSignOut}>signOut</button>
+    </>
+  );
+}
