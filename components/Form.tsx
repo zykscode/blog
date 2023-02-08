@@ -1,6 +1,6 @@
-import { AiOutlineEye } from '@react-icons/all-files/ai/aiOutlineEye';
-import { AiOutlineEyeInvisible } from '@react-icons/all-files/ai/AiOutlineEyeInvisible';
 import { BiUser } from '@react-icons/all-files/bi/BiUser';
+import { IoEyeOffOutline } from '@react-icons/all-files/io5/IoEyeOffOutline';
+import { IoEyeOutline } from '@react-icons/all-files/io5/IoEyeOutline';
 import { IoKey } from '@react-icons/all-files/io5/IoKey';
 import { IoMail } from '@react-icons/all-files/io5/IoMail';
 import { useFormik } from 'formik';
@@ -133,7 +133,7 @@ export const RegisterForm = () => {
           className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
           onClick={handleVisibilty}
         >
-          {!visibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          {!visibility ? <IoEyeOutline /> : <IoEyeOffOutline />}
         </span>
       </div>
       {formik.touched.password && formik.errors.password && (
@@ -159,7 +159,7 @@ export const RegisterForm = () => {
           className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
           onClick={handleCPasswordVisibilty}
         >
-          {!cPassordVisibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          {!cPassordVisibility ? <IoEyeOutline /> : <IoEyeOffOutline />}
         </span>
       </div>
       {formik.touched.cpassword && formik.errors.cpassword && (
@@ -237,7 +237,7 @@ export const LoginForm = ({ signin }: { signin: () => Promise<void> }) => {
           className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
           onClick={handleVisibilty}
         >
-          {!visibility ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          {!visibility ? <IoEyeOutline /> : <IoEyeOffOutline />}
         </span>
       </div>
       {formik.touched.password && formik.errors.password && (
