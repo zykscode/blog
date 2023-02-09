@@ -38,7 +38,7 @@ function TagPosts({
   tag: any;
   blurredImage?: BlurredPhoto;
 }) {
-  console.log(tag,'tagsggajsbx xshjasgahsgaj');
+  console.log(tag, 'tagsggajsbx xshjasgahsgaj');
   return (
     <>
       <PageSEO title={''} description={''} />
