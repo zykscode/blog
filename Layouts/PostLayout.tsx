@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 
-import { MDXComponents } from '#/components/MDXRender';
+import MDXComponents from '#/components/MDXRender';
 import Container from '#/components/PostContainer';
 import type { BlurredPhoto, Post } from '#/lib/types';
 
@@ -23,7 +23,7 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
     >
       <MDXRemote
         compiledSource={post.content!.markdown}
-        components={{ ...components }}
+        components={{ components }}
       />
     </Container>
   );
