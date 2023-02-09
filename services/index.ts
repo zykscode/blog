@@ -140,6 +140,7 @@ export const getPost = async ({ params }: { params: any }) => {
             createdAt
             content{
               markdown
+              text
             }
             coverPhoto{
               url

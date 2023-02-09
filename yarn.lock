@@ -11199,7 +11199,7 @@
     "unified" "^10.1.0"
     "unist-util-visit" "^4.0.0"
 
-"rehype-code-titles@1.1.0":
+"rehype-code-titles@^1.1.0":
   "integrity" "sha512-muit6KQWNafowXA0HTUeQtUT+UuP0ra34xty1tuF8WsdjcSm++HswgRAFGXH8CAGe8axuGUxg13+I4yFHFnmfQ=="
   "resolved" "https://registry.npmjs.org/rehype-code-titles/-/rehype-code-titles-1.1.0.tgz"
   "version" "1.1.0"

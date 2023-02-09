@@ -76,18 +76,25 @@ export type BlogSEOProps = {
   canonicalUrl?: string;
 };
 
-export type BlurredPhoto = {
+export type BlurredPhoto =
+  | {
+      base64: string;
+      postId?: any;
+      src: string;
+      height: number;
+      width: number;
+      type?: string | undefined;
+    }
+  | undefined;
+
+export type CoverImage = {
   base64: string;
-  postId: any;
+  postId?: any;
   src: string;
   height: number;
   width: number;
   type?: string | undefined;
 };
-
-export type CoverImage = {
-  id: string;
+export type CoverPhoto = {
   url: string;
-  width: number;
-  height: number;
 };
