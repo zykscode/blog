@@ -3,12 +3,12 @@ import { getPlaiceholder } from 'plaiceholder';
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
 import ListLayout from '#/Layouts/ListLayout';
-import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
+import type { BlurredPhoto, CoverPhoto, Post } from '#/lib/types';
 import { getPostsPhotos, indexPageQuery } from '#/services';
 import { graphcms } from '#/services/_graphcms';
 
 const blurImages = async (
-  photos: { id: any; coverPhoto: CoverImage }[],
+  photos: { id: any; coverPhoto: CoverPhoto }[],
 ): Promise<BlurredPhoto[]> => {
   const images = await Promise.all(
     photos.map(async (image) => {
@@ -53,7 +53,7 @@ export async function getStaticProps() {
 
   const posts = await (await fetchPosts()).map(({ node }) => node);
   const responsePhotos = await getPostsPhotos();
-  const photos: { id: string; coverPhoto: CoverImage }[] = responsePhotos.posts;
+  const photos: { id: string; coverPhoto: CoverPhoto }[] = responsePhotos.posts;
   const blurredPhotos = await blurImages(photos);
 
   return {

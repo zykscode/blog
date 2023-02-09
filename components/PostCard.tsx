@@ -13,7 +13,7 @@ type Props = {
 
 const PostCard: React.FC<Props> = ({ post, coverImages }) => {
   const passingImages = () => {
-    return coverImages.find((img) => img.postId === post.id);
+    return coverImages.find((img) => img!.postId === post.id);
   };
   const blurImg = passingImages();
   return (

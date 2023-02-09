@@ -4,11 +4,11 @@ import { getPlaiceholder } from 'plaiceholder';
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
 import ListLayout from '#/Layouts/ListLayout';
-import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
+import type { BlurredPhoto, CoverPhoto, Post } from '#/lib/types';
 import { blogPageQuery, blogPageStaticPaths } from '#/services';
 
 const blurImages = async (
-  photos: { id: any; coverPhoto: CoverImage }[],
+  photos: { id: any; coverPhoto: CoverPhoto }[],
 ): Promise<BlurredPhoto[]> => {
   const images = await Promise.all(
     photos.map(async (image) => {
