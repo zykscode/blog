@@ -27,7 +27,7 @@ export async function getStaticProps() {
   async function fetchPosts() {
     let offset = 0;
     let hasNextPage = true;
-    const limit = 3;
+    const limit = 2;
 
     const allPosts = [];
 

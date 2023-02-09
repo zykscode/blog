@@ -1,16 +1,41 @@
 /* eslint-disable import/no-unresolved */
-import type { Post } from '#/lib/types';
+import { getPlaiceholder } from 'plaiceholder';
+
+import { PageSEO } from '#/components/SEO';
+import { siteMetadata } from '#/data/siteMetadata';
+import ListLayout from '#/Layouts/ListLayout';
+import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
 import { blogPageQuery, blogPageStaticPaths } from '#/services';
+
+const blurImages = async (
+  photos: { id: any; coverPhoto: CoverImage }[],
+): Promise<BlurredPhoto[]> => {
+  const images = await Promise.all(
+    photos.map(async (image) => {
+      const { base64, img } = await getPlaiceholder(image.coverPhoto.url);
+      return {
+        ...img,
+        base64,
+        postId: image.id,
+      };
+    }),
+  );
+  return images;
+};
 
 export async function getStaticProps({ params }: { params: any }) {
   const {
     postsConnection: { posts, pageInfo },
   } = await blogPageQuery({ params });
+  const blurredPhotos = await blurImages(
+    posts.map((post: { node: Post }) => post.node),
+  );
   return {
     props: {
       currentPageNumber: Number(params.page),
       posts,
       ...pageInfo,
+      blurredPhotos,
     },
   };
 }
@@ -51,17 +76,24 @@ function BlogPage({
   currentPageNumber,
   hasNextPage,
   hasPreviousPage,
-  _posts,
+  posts,
+  blurredPhotos,
 }: {
   currentPageNumber: number;
   hasPreviousPage: boolean;
-  _posts: Post[];
+  posts: { node: Post }[];
   hasNextPage: boolean;
+  blurredPhotos: BlurredPhoto[];
 }) {
-  console.log(hasNextPage, hasPreviousPage, currentPageNumber);
+  const newPosts = posts.map(({ node }) => node);
+  console.log(posts, hasNextPage, hasPreviousPage, currentPageNumber);
   return (
     <>
-      <h1>blog paeg</h1>
+      <PageSEO
+        title={`${siteMetadata.author}'s blog`}
+        description={siteMetadata.description}
+      />
+      <ListLayout coverImage={blurredPhotos} posts={newPosts} />
     </>
   );
 }

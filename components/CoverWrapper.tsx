@@ -11,7 +11,7 @@ const CoverWrapper = ({ img }: Props) => {
   return (
     <div className="page-cover-wrapper">
       <Image
-        priority
+        priority={true}
         className="page-cover"
         src={img}
         alt="page cover wrapper"

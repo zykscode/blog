@@ -19,7 +19,7 @@ const PostCard: React.FC<Props> = ({ post, coverImages }) => {
   return (
     <Link
       className="collection-card collection-card-size-medium"
-      href={`/${post.slug}`}
+      href={`blog/${post.slug}`}
     >
       <div className="collection-card-cover">
         {blurImg && post.title && (

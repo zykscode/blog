@@ -1,27 +1,6 @@
-import { gql, GraphQLClient } from 'graphql-request';
+import { gql } from 'graphql-request';
 
-export const graphcms = new GraphQLClient(
-  'https://api-eu-central-1.hygraph.com/v2/cl6zaoh5c087901uhd1zdga18/master',
-);
-
-export const getProjects = async (): Promise<any> => {
-  return graphcms.request(`
-        query MyQuery {
-          projects {
-            name
-            tags
-            slug
-            createdAt
-            description
-            demo
-            sourceCode
-            image {
-              url
-            }
-          }
-        }
-      `);
-};
+import { graphcms } from './_graphcms';
 
 export const indexPageQuery = gql`
   query indexPageQuery($limit: Int!, $offset: Int!) {
@@ -60,6 +39,7 @@ export const indexPageQuery = gql`
     }
   }
 `;
+
 export const blogPageQuery = async ({ params }: { params: any }) => {
   const limit = 1;
   return graphcms.request(
@@ -107,6 +87,7 @@ export const blogPageQuery = async ({ params }: { params: any }) => {
     },
   );
 };
+
 export const blogPageStaticPaths = async () => {
   return graphcms.request(`{
   postsConnection{

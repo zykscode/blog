@@ -13,7 +13,7 @@ const ToggleThemeButton = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   const onToggleDarkMode = React.useCallback(
     (e: { preventDefault: () => void }) => {
@@ -31,7 +31,7 @@ const ToggleThemeButton = () => {
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
-  console.log(theme);
+
   return (
     <>
       {hasMounted && (
