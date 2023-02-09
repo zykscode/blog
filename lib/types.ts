@@ -18,7 +18,7 @@ export type Post = {
   readingTime?: string | undefined;
   createdAt?: string | undefined;
   tags?: Tag[] | undefined;
-  author: Author[];
+  author: Author;
   isFeatures: boolean;
 };
 

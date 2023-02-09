@@ -1,25 +1,40 @@
 import Image from 'next/image';
 import React from 'react';
 
-import type { BlurredPhoto } from '#/lib/types';
-
 type Props = {
-  img: BlurredPhoto;
+  img: {
+    base64: string;
+    img: {
+      src: string;
+      height: number;
+      width: number;
+    };
+    blurDataURL?: string;
+  };
 };
 
 const CoverWrapper = ({ img }: Props) => {
   return (
     <div className="page-cover-wrapper">
-      <Image
-        priority={true}
-        className="page-cover"
-        src={img}
-        alt="page cover wrapper"
-        height={img.height}
-        width={img.width}
-        placeholder="blur"
-        blurDataURL={img.base64}
-      />
+      {'base64' in img ? (
+        <Image
+          priority={true}
+          className="page-cover"
+          src={img.img.src}
+          alt="page cover wrapper"
+          height={img.img.height}
+          width={img.img.width}
+          placeholder="blur"
+          blurDataURL={img.base64}
+        />
+      ) : (
+        <Image
+          priority={true}
+          className="page-cover"
+          src={img}
+          alt="page cover wrapper"
+        />
+      )}
     </div>
   );
 };

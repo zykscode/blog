@@ -1,6 +1,7 @@
 import { getPlaiceholder } from 'plaiceholder';
 
 import { PageSEO } from '#/components/SEO';
+import PostLayout from '#/Layouts/PostLayout';
 import type { BlurredPhoto, CoverImage, Post } from '#/lib/types';
 import { getPost, getPostPaths } from '#/services';
 
@@ -13,11 +14,13 @@ const blurImage = async (photo: CoverImage) => {
 export async function getStaticProps({ params }: { params: any }) {
   const { post } = await getPost({ params });
   const blurredImage = await blurImage(post.coverPhoto);
+  const authorImage = await blurImage(post.author.avatar);
 
   return {
     props: {
       post,
       blurredImage,
+      authorImage,
     },
   };
 }
@@ -36,14 +39,20 @@ export async function getStaticPaths() {
 function BlogPost({
   post,
   blurredImage,
+  authorImage,
 }: {
   post: Post;
   blurredImage: BlurredPhoto;
+  authorImage: BlurredPhoto;
 }) {
-  console.log(post, blurredImage);
   return (
     <>
       <PageSEO title={''} description={''} />
+      <PostLayout
+        post={post}
+        authorImg={authorImage}
+        coverImage={blurredImage}
+      />
     </>
   );
 }
