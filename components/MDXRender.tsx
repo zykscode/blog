@@ -25,8 +25,7 @@ const CustomLink = (props: any) => {
     <a className="link" target="_blank" rel="noopener noreferrer" {...props} />
   );
 };
-
-export const MDXComponents = {
+const MDXComponents = {
   BlogImage,
   Image,
   TOCInline,

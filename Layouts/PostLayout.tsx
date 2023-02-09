@@ -1,7 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote';
 import React from 'react';
 
-import components from '#/components/MDXRender';
+import { MDXComponents } from '#/components/MDXRender';
 import Container from '#/components/PostContainer';
 import type { BlurredPhoto, Post } from '#/lib/types';
 
@@ -11,6 +11,7 @@ type Props = {
   authorImg: BlurredPhoto;
 };
 
+const components = MDXComponents;
 function PostLayout({ post, coverImage, authorImg }: Props) {
   console.log({ todo: ['speechify something'] });
   return (
@@ -20,7 +21,10 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
       post={post}
       title={post.title}
     >
-      <MDXRemote {...post.content} components={{ ...components }} />
+      <MDXRemote
+        compiledSource={post.content!.markdown}
+        components={{ ...components }}
+      />
     </Container>
   );
 }
