@@ -11,9 +11,8 @@ type Props = {
   authorImg: BlurredPhoto;
 };
 
-const components = MDXComponents;
 function PostLayout({ post, coverImage, authorImg }: Props) {
-  console.log({ todo: ['speechify something'] }, post.content);
+  console.log({ todo: ['speechify something'] });
   return (
     <Container
       authorImg={authorImg}
@@ -23,7 +22,7 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
     >
       <MDXRemote
         compiledSource={post.content!.compiledSource}
-        components={{ components }}
+        components={{ MDXComponents }}
       />
     </Container>
   );
