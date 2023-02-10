@@ -1,6 +1,7 @@
 /* eslint-disable unused-imports/no-unused-imports */
 import { getPlaiceholder } from 'plaiceholder';
 
+import { MDXLayoutRenderer } from '#/components/MDXRender';
 import { PageSEO } from '#/components/SEO';
 import PostLayout from '#/Layouts/PostLayout';
 import { mdxToHtml } from '#/lib/mdx';
@@ -64,7 +65,13 @@ function BlogPost({
         code={code}
         authorImg={authorImage}
         coverImage={post.coverPhoto}
-      />
+      >
+        <MDXLayoutRenderer
+          layout={'PostLayout'}
+          mdxSource={code}
+          rest={undefined}
+        />
+      </PostLayout>
     </>
   );
 }

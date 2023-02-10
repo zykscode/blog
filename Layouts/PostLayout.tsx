@@ -10,9 +10,10 @@ type Props = {
   coverImage: BlurredPhoto;
   authorImg: BlurredPhoto;
   code: string;
+  children: any;
 };
 
-function PostLayout({ post, code, coverImage, authorImg }: Props) {
+function PostLayout({ post, children, coverImage, authorImg }: Props) {
   console.log({ todo: ['speechify something'] });
   return (
     <Container
@@ -21,11 +22,7 @@ function PostLayout({ post, code, coverImage, authorImg }: Props) {
       post={post}
       title={post.title}
     >
-      <MDXLayoutRenderer
-        layout={'PostLayout'}
-        mdxSource={code}
-        rest={undefined}
-      />
+      {children}
     </Container>
   );
 }
