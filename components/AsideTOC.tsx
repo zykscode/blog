@@ -4,7 +4,6 @@ import useHeadings from '#/lib/useHeadings';
 
 function AsideTOC() {
   const { headings, selectedItem } = useHeadings();
-  console.log(selectedItem);
   return (
     <aside className="aside">
       <div className="aside-table-of-contents">

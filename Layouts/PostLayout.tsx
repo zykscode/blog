@@ -3,17 +3,17 @@ import React from 'react';
 
 import MDXComponents from '#/components/MDXRender';
 import Container from '#/components/PostContainer';
-import type { BlurredPhoto, Post } from '#/lib/types';
+import type { BlurredPhoto } from '#/lib/types';
 
 type Props = {
-  post: Post;
+  post: any;
   coverImage: BlurredPhoto;
   authorImg: BlurredPhoto;
 };
 
 const components = MDXComponents;
 function PostLayout({ post, coverImage, authorImg }: Props) {
-  console.log({ todo: ['speechify something'] });
+  console.log({ todo: ['speechify something'] }, post.content);
   return (
     <Container
       authorImg={authorImg}
@@ -22,7 +22,7 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
       title={post.title}
     >
       <MDXRemote
-        compiledSource={post.content}
+        compiledSource={post.content!.compiledSource}
         components={{ components }}
       />
     </Container>
