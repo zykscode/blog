@@ -22,7 +22,7 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
       title={post.title}
     >
       <MDXRemote
-        compiledSource={post.content!.markdown}
+        compiledSource={post.content}
         components={{ components }}
       />
     </Container>
