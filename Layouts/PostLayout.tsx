@@ -1,7 +1,7 @@
-import { MDXRemote } from 'next-mdx-remote';
+/* eslint-disable unused-imports/no-unused-imports */
 import React from 'react';
 
-import MDXComponents from '#/components/MDXRender';
+import { MDXLayoutRenderer } from '#/components/MDXRender';
 import Container from '#/components/PostContainer';
 import type { BlurredPhoto } from '#/lib/types';
 
@@ -9,9 +9,10 @@ type Props = {
   post: any;
   coverImage: BlurredPhoto;
   authorImg: BlurredPhoto;
+  code: string;
 };
 
-function PostLayout({ post, coverImage, authorImg }: Props) {
+function PostLayout({ post, code, coverImage, authorImg }: Props) {
   console.log({ todo: ['speechify something'] });
   return (
     <Container
@@ -20,9 +21,10 @@ function PostLayout({ post, coverImage, authorImg }: Props) {
       post={post}
       title={post.title}
     >
-      <MDXRemote
-        compiledSource={post.content!.compiledSource}
-        components={{ MDXComponents }}
+      <MDXLayoutRenderer
+        layout={'PostLayout'}
+        mdxSource={code}
+        rest={undefined}
       />
     </Container>
   );

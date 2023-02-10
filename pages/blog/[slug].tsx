@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-imports */
 import { getPlaiceholder } from 'plaiceholder';
 
 import { PageSEO } from '#/components/SEO';
@@ -16,7 +17,7 @@ export async function getStaticProps({ params }: { params: any }) {
   const { post } = await getPost({ params });
   const blurredImage = await blurImage(post.coverPhoto);
   const authorImage = await blurImage(post.author.avatar);
-  const { html, readingTime } = await mdxToHtml(post.content.markdown);
+  const { html, readingTime, code } = await mdxToHtml(post.content.markdown);
 
   return {
     props: {
@@ -27,6 +28,7 @@ export async function getStaticProps({ params }: { params: any }) {
       },
       readingTime,
       authorImage,
+      code,
     },
   };
 }
@@ -46,16 +48,20 @@ function BlogPost({
   post,
   authorImage,
   _readingTime,
+  code,
 }: {
   post: Post;
   authorImage: BlurredPhoto;
   _readingTime: string;
+  code: string;
 }) {
+  console.log(post.content);
   return (
     <>
       <PageSEO title={''} description={''} />
       <PostLayout
         post={post}
+        code={code}
         authorImg={authorImage}
         coverImage={post.coverPhoto}
       />
