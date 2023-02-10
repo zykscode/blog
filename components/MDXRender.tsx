@@ -41,7 +41,7 @@ export const MDXComponents = {
   pre: Pre,
   BlogNewsletterForm,
   wrapper: ({ components, layout, ...rest }: MDXComponentsProps) => {
-    const Layout = require(`../layouts/${layout}`).default;
+    const Layout = require(`../Layouts/${layout}`).default;
     return <Layout {...rest} />;
   },
 };
