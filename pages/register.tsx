@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RegisterForm } from '#/components/Form';
+import { RegisterForm } from '#/components/RegisterForm';
 import LoginLayout from '#/Layouts/LoginLayout';
 
 const Register = () => {

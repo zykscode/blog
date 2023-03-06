@@ -1,19 +1,20 @@
-'use client';
-
+/* eslint-disable unused-imports/no-unused-vars */
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp';
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline';
 import { useTheme } from 'next-themes';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useDarkMode } from '#/lib/use-dark-mode';
 
 import styles from './styles.module.css';
 
 const ToggleThemeButton = () => {
-  const [hasMounted, setHasMounted] = useState(false);
+  const [hasMounted, setHasMounted] = React.useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const { setTheme } = useTheme();
+  const { systemTheme, theme, setTheme } = useTheme();
+
+  const currentTheme = theme === 'system' ? systemTheme : theme;
 
   const onToggleDarkMode = React.useCallback(
     (e: { preventDefault: () => void }) => {
@@ -25,13 +26,12 @@ const ToggleThemeButton = () => {
       }
       toggleDarkMode();
     },
-    [isDarkMode, setTheme, toggleDarkMode],
+    [toggleDarkMode],
   );
 
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
-
   return (
     <>
       {hasMounted && (

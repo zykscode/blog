@@ -8,7 +8,6 @@ import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube';
 import { FaZhihu } from '@react-icons/all-files/fa/FaZhihu';
 import { IoMoonSharp } from '@react-icons/all-files/io5/IoMoonSharp';
 import { IoSunnyOutline } from '@react-icons/all-files/io5/IoSunnyOutline';
-import { useTheme } from 'next-themes';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 import { useDarkMode } from '../lib/use-dark-mode';
@@ -26,19 +25,12 @@ export const FooterImpl = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const { setTheme } = useTheme();
-
   const onToggleDarkMode = useCallback(
     (e: { preventDefault: () => void }) => {
       e.preventDefault();
-      if (isDarkMode) {
-        setTheme('light');
-      } else {
-        setTheme('dark');
-      }
       toggleDarkMode();
     },
-    [isDarkMode, setTheme, toggleDarkMode],
+    [toggleDarkMode],
   );
 
   useEffect(() => {

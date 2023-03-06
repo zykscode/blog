@@ -33,7 +33,6 @@ const Guest = () => {
 };
 
 export const Author = ({ session }: { session: Session }) => {
-  console.log(session, ': session');
   return (
     <Container coverWrapper={Me}>
       <div className="page-content page-content-has-aside">
@@ -71,6 +70,7 @@ export default function Home() {
   const handleSignOut = () => {
     signOut();
   };
+
   return (
     <>
       {!session ? <Guest /> : <Author session={session} />}

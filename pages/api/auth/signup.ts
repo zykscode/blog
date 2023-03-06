@@ -37,7 +37,6 @@ export default async function handler(
     const { username, email, password } = req.body;
 
     try {
-      console.log(username);
       const user = await createUser(username, email, password);
       return res.status(201).json({ status: true, user });
     } catch (error: any) {

@@ -1,15 +1,11 @@
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
-const GOOGLE_ID =
-  '481493214464-9q5so0iemi9kujgvgk49ohtcmvh3oajr.apps.googleusercontent.com';
-const GOOGLE_SECRET = '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';
-
 export default NextAuth({
   providers: [
     GoogleProvider({
-      clientId: GOOGLE_ID,
-      clientSecret: GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
     // Credentials({
     //   name: 'Credentials',

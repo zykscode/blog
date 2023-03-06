@@ -56,7 +56,6 @@ function BlogPost({
   _readingTime: string;
   code: string;
 }) {
-  console.log(post.content);
   return (
     <>
       <PageSEO title={''} description={''} />

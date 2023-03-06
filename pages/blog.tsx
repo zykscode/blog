@@ -1,4 +1,5 @@
 import { getPlaiceholder } from 'plaiceholder';
+import { useEffect } from 'react';
 
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
@@ -71,6 +72,9 @@ export default function Home({
   posts: Post[];
   blurredPhotos: BlurredPhoto[];
 }) {
+  useEffect(() => {
+    console.log({ todo: ['map and routing'] });
+  });
   return (
     <>
       <PageSEO
