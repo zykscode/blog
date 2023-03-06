@@ -1,11 +1,9 @@
 import { BiUser } from '@react-icons/all-files/bi/BiUser';
-import { IoEyeOffOutline } from '@react-icons/all-files/io5/IoEyeOffOutline';
-import { IoEyeOutline } from '@react-icons/all-files/io5/IoEyeOutline';
-import { IoKey } from '@react-icons/all-files/io5/IoKey';
 import { IoMail } from '@react-icons/all-files/io5/IoMail';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { IoEyeOffOutline, IoEyeOutline, IoKey } from 'react-icons/io5';
 import * as Yup from 'yup';
 
 import styles from '#/styles/Form.module.scss';
@@ -59,13 +57,11 @@ export const RegisterForm = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     };
-    try {
-      const res = await fetch(process.env.REGISTER_API_URL!, options);
-      const data = await res.json();
-      if (data) router.push('http://localhost:3000');
-    } catch (error) {
-      console.error(error);
-    }
+    await fetch('http://localhost:3000/api/auth/signup', options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) router.push('http://localhost:3000');
+      });
   };
 
   const formik = useFormik({

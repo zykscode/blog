@@ -4,7 +4,7 @@
 }
 
 .input_text {
-    @apply block  placeholder:text-[var(fg-color-1)] w-full bg-[var(--bg-color-1)] inset-0 transition duration-300 ease-in-out rounded-lg border p-2.5 pl-10 text-sm text-[var(--fg-color)] 
+    @apply block  placeholder:text-[var(fg-color-1)] w-full bg-[var(--bg-color-1)] inset-0 transition duration-300 ease-in-out rounded-lg border p-2.5 pl-10 text-sm pr-10 text-[var(--fg-color)] 
 }
 
 
