@@ -1,42 +1,93 @@
-import NextAuth from 'next-auth/next';
+import { compare, hash } from 'bcryptjs';
+import type { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
-export default NextAuth({
+import type { Post } from '#/lib/types';
+import { graphcms } from '#/services/_graphcms';
+
+import { CreateNextAuthUserByEmail, GetNextAuthUserByEmail } from './_auth';
+
+interface Author {
+  id: string;
+  password: string;
+  email: string;
+  name?: string;
+  posts?: Post[];
+  slug?: string;
+}
+
+interface CustomSession extends Session {
+  userId?: string;
+}
+
+const options: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+    CredentialsProvider({
+      name: 'Email and Password',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'name@mail.com',
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: 'password',
+        },
+      },
+      authorize: async (credentials: any) => {
+        const { email, password } = credentials;
+
+        const { user } = await graphcms.request(GetNextAuthUserByEmail, {
+          email,
+        });
+
+        if (!user) {
+          const { newUser } = await graphcms.request(
+            CreateNextAuthUserByEmail,
+            {
+              email,
+              password: await hash(password, 12),
+            },
+          );
+
+          return {
+            id: newUser.id,
+            email,
+          };
+        }
+
+        const isValid = await compare(password, user.password);
+
+        if (!isValid) {
+          throw new Error('Wrong credentials. Try again.');
+        }
+
+        return {
+          id: user.id,
+          name: email,
+          email,
+        };
+      },
     }),
-    // Credentials({
-    //   name: 'Credentials',
-    //   async authorize(credentials, req) {
-    //     try {
-    //       await connectToMongoDB();
-    //     } catch (err) {
-    //       return { error: 'Connection Failed!' };
-    //     }
-
-    //     // check password
-    //     const result = await Users.find({ email: credentials.email });
-    //     if (!result) {
-    //       throw new Error('No user Found with the Email!');
-    //     }
-
-    //     // compare
-    //     const checkPassword = await compare(
-    //       credentials!.password,
-    //       result.password,
-    //     );
-
-    //     // incorrect password
-    //     if (!checkPassword || result.email !== credentials.email) {
-    //       throw new Error("Email or password doesn't match");
-    //     }
-
-    //     return result;
-    //   },
-    // }),
   ],
-  secret:
-    'M_ga_RCee0rdyHTLSGuIT8pLimD5saLG78vxQ-cVK3k8ZO4QACATQnUVXYBpP9UzPuasyX3aPUcCl_RXAa9Q3A',
-});
+  callbacks: {
+    async session({ session, token }) {
+      session.userId = token.sub;
+      return Promise.resolve(session);
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET!,
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET!,
+  },
+  session: {
+    strategy: 'jwt',
+  },
+  debug: process.env.NODE_ENV === 'development',
+};
+
+export default NextAuth(options);

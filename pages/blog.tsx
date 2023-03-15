@@ -7,6 +7,7 @@ import ListLayout from '#/Layouts/ListLayout';
 import type { BlurredPhoto, CoverPhoto, Post } from '#/lib/types';
 import { getPostsPhotos, indexPageQuery } from '#/services';
 import { graphcms } from '#/services/_graphcms';
+import Header from '#/ui/header';
 
 const blurImages = async (
   photos: { id: any; coverPhoto: CoverPhoto }[],
@@ -81,6 +82,7 @@ export default function Home({
         title={`${siteMetadata.author}'s blog`}
         description={siteMetadata.description}
       />
+      <Header />
       <ListLayout coverImage={blurredPhotos} posts={posts} />
     </>
   );

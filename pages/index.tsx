@@ -7,6 +7,7 @@ import Container from '#/components/Container';
 import { PageSEO } from '#/components/SEO';
 import { siteMetadata } from '#/data/siteMetadata';
 import Me from '#/public/static/images/me.jpg';
+import Header from '#/ui/header';
 
 const Guest = () => {
   return (
@@ -17,6 +18,7 @@ const Guest = () => {
       />
       <Container coverWrapper={Me}>
         <div className="page-content page-content-has-aside">
+          <Header />
           <article className="page-content-inner">
             <div className="collection block">
               <div className="collection-header">
@@ -33,6 +35,7 @@ const Guest = () => {
 };
 
 export const Author = ({ session }: { session: Session }) => {
+  console.log(session);
   return (
     <Container coverWrapper={Me}>
       <div className="page-content page-content-has-aside">
@@ -66,13 +69,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 };
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const handleSignOut = () => {
     signOut();
   };
 
+  const loading = status === 'loading';
+
   return (
     <>
+    <Header />
+      <h2>{loading}</h2>
       {!session ? <Guest /> : <Author session={session} />}
       <button onClick={handleSignOut}>signOut</button>
     </>

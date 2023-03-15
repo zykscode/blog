@@ -1,34 +1,33 @@
-import { IoEyeOffOutline } from '@react-icons/all-files/io5/IoEyeOffOutline';
-import { IoEyeOutline } from '@react-icons/all-files/io5/IoEyeOutline';
-import { IoKey } from '@react-icons/all-files/io5/IoKey';
-import { IoMail } from '@react-icons/all-files/io5/IoMail';
 import { useFormik } from 'formik';
-import { signIn } from 'next-auth/react';
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
+import { IoEyeOffOutline, IoEyeOutline, IoKey, IoMail } from 'react-icons/io5';
+
+import { AuthContext } from '#/context/authentication';
 
 import styles from '#/styles/Form.module.scss';
 
-export const LoginForm = ({ signin }: { signin: () => Promise<void> }) => {
+export const LoginForm = () => {
+  const { LoginToAccount } = useContext(AuthContext)!;
   const [visibility, setVisibility] = useState(false);
-  const handleVisibilty = () => {
-    return setVisibility(!visibility);
-  };
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: async (values: { email: string; password: string }) => {
-      const status = await signIn('credentials', {
-        redirect: false,
+    onSubmit: async (values) => {
+      const body = {
         email: values.email,
         password: values.password,
-        callbackUrl: '/',
-      });
-
-      console.log(status);
+      };
+      await LoginToAccount(body);
     },
   });
+
+  const handleVisibilty = () => {
+    return setVisibility(!visibility);
+  };
+
   return (
     <form className="flexGroup gap-5" onSubmit={formik.handleSubmit}>
       <div className={styles.input_group}>
@@ -49,12 +48,10 @@ export const LoginForm = ({ signin }: { signin: () => Promise<void> }) => {
           value={formik.values.email}
         />
       </div>
-
       <div className={styles.input_group}>
-        <span className="absolute inset-y-0 left-0 flex cursor-pointer items-center pl-3 text-gray-500 dark:text-gray-400">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 dark:text-gray-400">
           <IoKey />
-        </span>
-
+        </div>
         <input
           className={` ${styles.input_text}  ${
             formik.touched.password && formik.errors.password
@@ -62,32 +59,22 @@ export const LoginForm = ({ signin }: { signin: () => Promise<void> }) => {
               : 'border-[var(--blue)] ring-[var(--blue)] focus:border-[var(--blue)] focus:ring-[var(--blue)] '
           }`}
           type={visibility ? 'text' : 'password'}
-          placeholder="Password"
-          {...formik.getFieldProps('password')}
+          name="password"
+          placeholder="**********"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.password}
         />
-
-        <span
-          className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
+        <div
           onClick={handleVisibilty}
+          className="pointer-events-auto absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-500 dark:text-gray-400"
         >
-          {!visibility ? <IoEyeOutline /> : <IoEyeOffOutline />}
-        </span>
+          {visibility ? <IoEyeOutline /> : <IoEyeOffOutline />}
+        </div>
       </div>
-      {formik.touched.password && formik.errors.password && (
-        <span className="text-sm text-red-400">{formik.errors.password}</span>
-      )}
-
-      {/* Login Buttons */}
-      <div className={styles.input_button}>
-        <button className={styles.button} type="submit">
-          Login
-        </button>
-      </div>
-      <div className={styles.input_button}>
-        <button type="button" onClick={signin} className={styles.button_custom}>
-          Sign with Google
-        </button>
-      </div>
+      <button className={styles.submit_button} type="submit">
+        Login
+      </button>
     </form>
   );
 };
